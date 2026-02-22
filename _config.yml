@@ -1,15 +1,21 @@
-name: Felipe G. Bogo
-shortname: felipegbogo
-url: https://felipegbogo.github.io
-title: Ph.D. Candidate - Geometria Diferencial & Conforme
-email: felipegbogo@gmail.com
-twitter_username: false
-github_username: felipegbogo
+remote_theme: academicpages/academicpages.github.io
+title: "Felipe G. Bogo"
+name: "Felipe G. Bogo"
+description: "Ph.D. Candidate | UFF | Nanjing University"
+url: "https://felipegbogo.github.io"
+timezone: America/Sao_Paulo
 
 collections:
-  teaching:
-    output: true
-    permalink: /teaching/:path/
   publications:
     output: true
     permalink: /publication/:path/
+  teaching:
+    output: true
+    permalink: /teaching/:path/
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-remote-theme

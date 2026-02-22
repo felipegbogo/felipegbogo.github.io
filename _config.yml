@@ -1,13 +1,15 @@
-title: "Felipe Gabriel Bogo"
-description: "PhD candidate in Mathematics · Differential Geometry · Riemannian and Conformal Geometry"
-theme: minima
+name: Felipe G. Bogo
+shortname: felipegbogo
+url: https://felipegbogo.github.io
+title: Ph.D. Candidate - Geometria Diferencial & Conforme
+email: felipegbogo@gmail.com
+twitter_username: false
+github_username: felipegbogo
 
-author:
-  name: "Felipe Gabriel Bogo"
-  email: "felipegbogo@gmail.com"
-  affiliation: "Universidade Federal Fluminense (UFF) & Nanjing University"
-
-markdown: kramdown
-kramdown:
-  input: GFM
-  math_engine: mathjax
+collections:
+  teaching:
+    output: true
+    permalink: /teaching/:path/
+  publications:
+    output: true
+    permalink: /publication/:path/

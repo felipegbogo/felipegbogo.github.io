@@ -1,0 +1,13 @@
+title: "Felipe Gabriel Bogo"
+description: "PhD candidate in Mathematics · Differential Geometry · Riemannian and Conformal Geometry"
+theme: minima
+
+author:
+  name: "Felipe Gabriel Bogo"
+  email: "felipegbogo@gmail.com"
+  affiliation: "Universidade Federal Fluminense (UFF) & Nanjing University"
+
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: mathjax

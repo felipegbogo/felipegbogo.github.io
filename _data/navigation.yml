@@ -1,0 +1,8 @@
+- name: "Sobre"
+  link: "/"
+- name: "Publicações" 
+  link: "/publications/"
+- name: "Ensino"
+  link: "/teaching/"
+- name: "CV"
+  link: "/cv/"

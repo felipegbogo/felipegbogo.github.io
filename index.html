@@ -51,7 +51,12 @@
     #felipe-bogo-classic-cv .bogo-education-detail { display:block; font:400 1rem/1.7 Arial,sans-serif; color:var(--bogo-soft); margin-top:.375rem; }
     #felipe-bogo-classic-cv .bogo-page { padding:clamp(2rem,4vw,3rem) 0 1.5rem; }
     #felipe-bogo-classic-cv .bogo-page h1 { font:400 clamp(2rem,1.5rem + 2vw,3.5rem)/1.15 Georgia,serif; margin:1rem 0 1.5rem; overflow-wrap:anywhere; }
-    #felipe-bogo-classic-cv .bogo-page > p { max-width:65ch; font:400 var(--bogo-reading-size)/1.8 Georgia,serif; color:var(--bogo-soft); }
+    #felipe-bogo-classic-cv .bogo-page-header { display:grid; grid-template-columns:minmax(0,1fr) minmax(15rem,23rem); align-items:center; gap:clamp(1.5rem,4vw,4rem); margin-bottom:1rem; }
+    #felipe-bogo-classic-cv .bogo-page-header.without-surface { display:block; }
+    #felipe-bogo-classic-cv .bogo-page-heading { min-width:0; }
+    #felipe-bogo-classic-cv .bogo-page-description { max-width:65ch; font:400 var(--bogo-reading-size)/1.8 Georgia,serif; color:var(--bogo-soft); }
+    #felipe-bogo-classic-cv .bogo-page-figure { margin:0; min-width:0; color:var(--bogo-blue); }
+    #felipe-bogo-classic-cv .bogo-page-surface { display:block; width:100%; height:clamp(12rem,20vw,16rem); object-fit:contain; }
     #felipe-bogo-classic-cv .bogo-section-title { font:400 clamp(1.5rem,1.3rem + .6vw,2rem)/1.4 Georgia,serif; margin:2.5rem 0 0; }
     #felipe-bogo-classic-cv .bogo-list { list-style:none; padding:0; margin:1.5rem 0 0; }
     #felipe-bogo-classic-cv .bogo-list > li { padding:1.5rem 0; border-top:1px solid var(--bogo-line); }
@@ -69,6 +74,9 @@
       #felipe-bogo-classic-cv .bogo-figure { width:100%; max-width:38rem; justify-self:center; }
     }
     @media(max-width:40rem) {
+      #felipe-bogo-classic-cv .bogo-page-header { grid-template-columns:minmax(0,1fr); gap:1rem; }
+      #felipe-bogo-classic-cv .bogo-page-figure { width:min(100%,22rem); justify-self:center; }
+      #felipe-bogo-classic-cv .bogo-page-surface { height:12rem; }
       #felipe-bogo-classic-cv .bogo-education-list li { grid-template-columns:minmax(0,1fr); gap:.25rem; }
       #felipe-bogo-classic-cv .bogo-course-row { grid-template-columns:2.5rem minmax(0,1fr); }
       #felipe-bogo-classic-cv .bogo-course-row > span:last-child { grid-column:2; }
@@ -100,6 +108,7 @@
     </div>
     <section class="bogo-page" aria-live="polite" hidden></section>
   </main>
+  <script src="assets/surfaces.js"></script>
   <script>
     (() => {
       const root = document.getElementById('felipe-bogo-classic-cv');
@@ -229,7 +238,23 @@
           const label=document.createElement('div');label.className='bogo-eyebrow';label.textContent=state.page==='course'?d.courseLabel:state.page==='publications'?d.researchLabel:state.page==='notes'?d.teachingLabel:d.contactLabel;
           const title=document.createElement('h1');title.textContent=d.nav[pages.indexOf(state.page)];
           const description=document.createElement('p');description.textContent=state.page==='course'?d.courseIntro:state.page==='publications'?d.publicationsIntro:state.page==='notes'?d.notesIntro:d.contactIntro;
-          panel.append(label,title,description);
+          const header=document.createElement('div');header.className='bogo-page-header';
+          const heading=document.createElement('div');heading.className='bogo-page-heading';
+          description.className='bogo-page-description';heading.append(label,title,description);header.append(heading);
+          const surfaceKind={publications:'costa',notes:'torus',contact:'sphere'}[state.page];
+          if(surfaceKind) {
+            const figure=document.createElement('figure');figure.className='bogo-page-figure';
+            if(surfaceKind==='costa') {
+              const image=document.createElement('img');image.className='bogo-page-surface';
+              image.src='assets/surfaces/costa.svg';image.alt=state.lang==='pt'?'Superfície mínima de Costa':'Costa minimal surface';
+              image.width=420;image.height=280;image.decoding='async';figure.append(image);
+            } else {
+              const drawing=document.createElementNS('http://www.w3.org/2000/svg','svg');drawing.classList.add('bogo-page-surface');
+              window.BogoSurfaces.draw(drawing,surfaceKind,state.lang);figure.append(drawing);
+            }
+            header.append(figure);
+          } else header.classList.add('without-surface');
+          panel.append(header);
           if(state.page==='course') {
             const row=document.createElement('div');row.className='bogo-course-row';
             const number=document.createElement('span');number.className='bogo-number';number.textContent='00';

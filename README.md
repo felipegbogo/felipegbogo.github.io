@@ -6,7 +6,7 @@ Personal academic website of Felipe G. Bogo, featuring research in differential 
 
 ## About the website
 
-The site brings together my academic work, teaching materials, and contact information. Its classical visual style uses serif typography and a catenoid drawn from its mathematical parametrization as an SVG wireframe.
+The site brings together my academic work, teaching materials, and contact information. Its classical visual style combines serif typography with mathematical surfaces drawn as blue SVG wireframes.
 
 The layout adapts to desktop, tablet, and mobile screens, with fluid text sizes and support for light and dark color schemes. Visitors can switch between Portuguese and English; their language preference is saved in their browser. Linked documents retain their original language.
 
@@ -18,11 +18,28 @@ The layout adapts to desktop, tablet, and mobile screens, with fluid text sizes 
 - **Catholic Doctrine:** an introductory session and a section prepared for future course notes, documents, and further reading.
 - **Contact:** email addresses and institutional information.
 
+## Mathematical illustrations
+
+| Section | Surface |
+| --- | --- |
+| Homepage | Catenoid |
+| Publications | Costa minimal surface |
+| Class Notes | Torus of revolution |
+| Contact | Sphere with great-circle geodesics |
+| Catholic Doctrine | No surface |
+
+The drawings are generated from mathematical formulas, with no stock images or rendering libraries. The catenoid is drawn in `index.html`; the torus and sphere are drawn in `assets/surfaces.js`. That file also includes a helicoid reserved for Miscellanea, which remains hidden.
+
+The Costa illustration is generated numerically from its Weierstrass representation, following O. Michael Melko's [Visualizing Minimal Surfaces (2010)](https://content.wolfram.com/sites/19/2010/12/Melko.pdf). Its reproducible Python generator, mathematical references, and finite truncation details are documented in `scripts/generate_costa.py`.
+
 ## Source files
 
 | File | Purpose |
 | --- | --- |
 | `index.html` | Page structure, styling, bilingual content, navigation, and the catenoid drawing. |
+| `assets/surfaces.js` | Parametric torus and sphere drawings, plus the reserved helicoid. |
+| `assets/surfaces/costa.svg` | Generated Costa illustration, with light and dark color schemes. |
+| `scripts/generate_costa.py` | Reproducible Costa generator and mathematical references. |
 | `docs/CV_Felipe_G_Bogo.pdf` | Compiled CV, opened in a new tab from the homepage. |
 | `docs/README.md` | Instructions for updating documents. |
 
@@ -45,7 +62,8 @@ Then open [localhost:8000](http://localhost:8000/) in your browser.
 - Replace `docs/CV_Felipe_G_Bogo.pdf` to update the CV, keeping the same filename and capitalization.
 - Add new PDFs to `docs/` and link to them using relative paths in `index.html`. Existing Google Drive and Dropbox links remain external.
 - Update course content in the `course` branch of the `render()` function when new materials are ready.
-- Edit the CSS and the surface drawing code in `index.html` to adjust the appearance.
+- Edit the CSS in `index.html` and the drawing code in `index.html` or `assets/surfaces.js` to adjust the appearance.
+- To regenerate the Costa illustration with Python 3.10 or newer, run `python3 scripts/generate_costa.py` from the repository directory.
 
 ## Deployment
 

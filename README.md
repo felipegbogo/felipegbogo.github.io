@@ -44,31 +44,3 @@ The Costa illustration is generated numerically from its Weierstrass representat
 | `docs/README.md` | Instructions for updating documents. |
 
 The website uses plain HTML, CSS, and JavaScript. It requires no package installation or build step.
-
-## Preview locally
-
-From the repository directory, run:
-
-```sh
-python3 -m http.server 8000
-```
-
-Then open [localhost:8000](http://localhost:8000/) in your browser.
-
-## Update the content
-
-- Edit the `imported` object in `index.html` to update biographies, education, publications, class notes, and contact links.
-- Edit the `text` object to update interface labels in Portuguese (`pt`) and English (`en`).
-- Replace `docs/CV_Felipe_G_Bogo.pdf` to update the CV, keeping the same filename and capitalization.
-- Add new PDFs to `docs/` and link to them using relative paths in `index.html`. Existing Google Drive and Dropbox links remain external.
-- Update course content in the `course` branch of the `render()` function when new materials are ready.
-- Edit the CSS in `index.html` and the drawing code in `index.html` or `assets/surfaces.js` to adjust the appearance.
-- To regenerate the Costa illustration with Python 3.10 or newer, run `python3 scripts/generate_costa.py` from the repository directory.
-
-## Deployment
-
-This repository is published with [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
-
-In **Settings → Pages**, the publishing source is **Deploy from a branch**, using the **main** branch and **/ (root)** folder. The `docs/` directory stores documents; the website entry point is `index.html` at the repository root.
-
-Push changes to `main` to publish an update. Deployment progress is available under **Actions**, and the live address is shown in **Settings → Pages**.

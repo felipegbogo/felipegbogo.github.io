@@ -1,11 +1,11 @@
-# Currículo e documentos
+# CV and Course Documents
 
-Copie para esta pasta o PDF do currículo que você já possui e renomeie-o para:
+This directory includes the compiled CV:
 
 `CV_Felipe_G_Bogo.pdf`
 
-O arquivo deve ficar ao lado deste README, resultando no caminho `docs/CV_Felipe_G_Bogo.pdf` a partir da raiz do site. Respeite as letras maiúsculas e minúsculas.
+The homepage links to `docs/CV_Felipe_G_Bogo.pdf` and opens it in a new tab. To update the CV, replace this PDF while keeping the same filename and capitalization.
 
-**O PDF não está incluído no pacote.** O botão CV depende dessa cópia manual antes da publicação.
+This directory can also hold class notes and Catholic doctrine course materials. After adding a document, link to its relative path in `index.html`, for example `docs/lecture-notes.pdf`.
 
-Esta pasta também pode receber futuras notas de aula e materiais do Curso de Doutrina. Acrescente os links correspondentes em `index.html` depois de enviar cada documento.
+GitHub Pages publishes this site from the repository root, where `index.html` is located. This directory is for documents and should not be selected as the publishing source.

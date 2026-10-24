@@ -1,36 +1,56 @@
-# Site pessoal de Felipe G. Bogo
+# Felipe G. Bogo — Personal Website
 
-Site estático com navegação em português e inglês. Não precisa instalar Node, dependências ou executar uma compilação.
+Personal academic website of Felipe G. Bogo, featuring research in differential geometry and geometric analysis, publications, class notes, and a Catholic doctrine course. The interface is available in Portuguese and English.
 
-## Acrescentar o currículo
+**Visit the website:** [felipegbogo.github.io](https://felipegbogo.github.io/)
 
-O PDF do currículo não está incluído neste pacote. Copie o PDF já compilado que você possui para a pasta `docs` e use exatamente este nome:
+## About the website
 
-`docs/CV_Felipe_G_Bogo.pdf`
+The site brings together my academic work, teaching materials, and contact information. Its classical visual style uses serif typography and a catenoid drawn from its mathematical parametrization as an SVG wireframe.
 
-O botão **CV** já aponta para esse arquivo. Ele funcionará depois que o PDF estiver nessa pasta e for enviado ao GitHub.
+The layout adapts to desktop, tablet, and mobile screens, with fluid text sizes and support for light and dark color schemes. Visitors can switch between Portuguese and English; their language preference is saved in their browser. Linked documents retain their original language.
 
-## Publicar pelo navegador
+## Sections
 
-1. Descompacte o pacote no computador e acrescente o PDF na pasta `docs`.
-2. No GitHub, crie um repositório público chamado `SEU_USUARIO.github.io`, substituindo `SEU_USUARIO` pelo seu nome de usuário. Se esse repositório já existir, use-o.
-3. Abra o repositório e escolha **Add file → Upload files**. Em um repositório vazio, use o link para enviar um arquivo existente.
-4. Envie o **conteúdo** da pasta deste pacote: `index.html`, `README.md` e a pasta `docs`, já com o PDF. O `index.html` deve ficar na raiz do repositório. Não envie o ZIP nem uma pasta externa envolvendo todos os arquivos.
-5. Confirme o envio em **Commit changes**, na branch `main`.
-6. Abra **Settings → Pages**. Em **Build and deployment**, escolha **Deploy from a branch**; em **Branch**, escolha `main` e a pasta `/ (root)`. Clique em **Save**.
-7. Aguarde a publicação. Acompanhe a execução em **Actions** e abra o endereço mostrado em **Settings → Pages**. Para o nome de repositório acima, ele será `https://SEU_USUARIO.github.io/`.
-8. Confira o seletor PT/EN, as seções, os links dentro da biografia e os botões **CV** e **CV Lattes**. Abra o CV para confirmar que o PDF foi enviado com o nome correto.
+- **Homepage:** a short biography, education and research visits, and links to my CV and Lattes profile.
+- **Publications:** published papers, ongoing doctoral research, and my master's dissertation and related materials.
+- **Class Notes:** mathematics notes and problem sets, currently covering algebra and topology.
+- **Catholic Doctrine:** an introductory session and a section prepared for future course notes, documents, and further reading.
+- **Contact:** email addresses and institutional information.
 
-O pacote também contém `.nojekyll`, que pode ser enviado se estiver visível no seu seletor de arquivos. Sua ausência não impede este site simples de HTML de funcionar. Se você escolher um nome diferente para o repositório, o endereço terá também o nome dele: `https://SEU_USUARIO.github.io/NOME_DO_REPOSITORIO/`.
+## Source files
 
-## Atualizar o conteúdo
+| File | Purpose |
+| --- | --- |
+| `index.html` | Page structure, styling, bilingual content, navigation, and the catenoid drawing. |
+| `docs/CV_Felipe_G_Bogo.pdf` | Compiled CV, opened in a new tab from the homepage. |
+| `docs/README.md` | Instructions for updating documents. |
 
-- **Textos e links:** edite `index.html`. No bloco JavaScript, o objeto `imported` reúne biografia, formação, publicações, notas e contato. O objeto `text` contém os rótulos em português (`pt`) e inglês (`en`).
-- **Currículo:** substitua `docs/CV_Felipe_G_Bogo.pdf`, mantendo o nome.
-- **Notas e documentos novos:** coloque os PDFs em `docs` e acrescente os caminhos relativos correspondentes em `imported`. Os documentos já vinculados ao Drive e ao Dropbox continuam nos destinos originais.
-- **Curso de Doutrina:** a seção está preparada com a aula introdutória. Os materiais do curso ainda precisam ser acrescentados; nenhum PDF de aula fictício foi incluído.
-- **Aparência:** os estilos estão no início de `index.html`. O catenoide é desenhado a partir de sua parametrização matemática no próprio arquivo.
+The website uses plain HTML, CSS, and JavaScript. It requires no package installation or build step.
 
-A preferência de idioma é guardada apenas no navegador do visitante. Ao reabrir o site, a seção inicial será a Homepage.
+## Preview locally
 
-Referência: [documentação oficial do GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site).
+From the repository directory, run:
+
+```sh
+python3 -m http.server 8000
+```
+
+Then open [localhost:8000](http://localhost:8000/) in your browser.
+
+## Update the content
+
+- Edit the `imported` object in `index.html` to update biographies, education, publications, class notes, and contact links.
+- Edit the `text` object to update interface labels in Portuguese (`pt`) and English (`en`).
+- Replace `docs/CV_Felipe_G_Bogo.pdf` to update the CV, keeping the same filename and capitalization.
+- Add new PDFs to `docs/` and link to them using relative paths in `index.html`. Existing Google Drive and Dropbox links remain external.
+- Update course content in the `course` branch of the `render()` function when new materials are ready.
+- Edit the CSS and the surface drawing code in `index.html` to adjust the appearance.
+
+## Deployment
+
+This repository is published with [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+
+In **Settings → Pages**, the publishing source is **Deploy from a branch**, using the **main** branch and **/ (root)** folder. The `docs/` directory stores documents; the website entry point is `index.html` at the repository root.
+
+Push changes to `main` to publish an update. Deployment progress is available under **Actions**, and the live address is shown in **Settings → Pages**.

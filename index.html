@@ -9,87 +9,71 @@
   <style>
     html { color-scheme:light dark; background:light-dark(#f8f6ef,#171b22); }
     body { margin:0; }
-    #felipe-bogo-classic-cv { max-width:960px; margin:0 auto; }
+    #felipe-bogo-classic-cv { width:100%; max-width:90rem; margin:0 auto; }
     #felipe-bogo-classic-cv button, #felipe-bogo-classic-cv a { cursor:pointer; }
     #felipe-bogo-classic-cv .bogo-header { padding-right:0; }
-    noscript { display:block; padding:24px; font:16px/1.6 Georgia,serif; color:light-dark(#202d3a,#edece6); }
+    noscript { display:block; padding:1.5rem; font:1rem/1.6 Georgia,serif; color:light-dark(#202d3a,#edece6); }
   </style>
 </head>
 <body>
 <div id="felipe-bogo-classic-cv">
   <style>
-    #felipe-bogo-classic-cv { color-scheme:light dark; --bogo-paper:light-dark(#f8f6ef,#171b22); --bogo-ink:light-dark(#202d3a,#edece6); --bogo-soft:light-dark(#526172,#aab7c8); --bogo-line:light-dark(#d3d6d6,#3c4756); --bogo-blue:light-dark(#234d78,#a4c8ee); font-family:Arial,sans-serif; }
+    #felipe-bogo-classic-cv { color-scheme:light dark; --bogo-paper:light-dark(#f8f6ef,#171b22); --bogo-ink:light-dark(#202d3a,#edece6); --bogo-soft:light-dark(#526172,#aab7c8); --bogo-line:light-dark(#d3d6d6,#3c4756); --bogo-blue:light-dark(#234d78,#a4c8ee); --bogo-reading-size:clamp(1.125rem,1.04rem + .3vw,1.3125rem); font:400 var(--bogo-reading-size)/1.7 Arial,sans-serif; }
     #felipe-bogo-classic-cv * { box-sizing:border-box; }
-    #felipe-bogo-classic-cv .bogo-site { background:var(--bogo-paper); color:var(--bogo-ink); padding:32px 46px 28px; position:relative; }
+    #felipe-bogo-classic-cv .bogo-site { background:var(--bogo-paper); color:var(--bogo-ink); padding:clamp(1.25rem,4vw,4.5rem); position:relative; }
     #felipe-bogo-classic-cv h1, #felipe-bogo-classic-cv h2, #felipe-bogo-classic-cv p { margin:0; color:inherit; }
-    #felipe-bogo-classic-cv .bogo-header { display:flex; justify-content:space-between; align-items:center; gap:24px; }
-    #felipe-bogo-classic-cv .bogo-brand { font:500 15px/1.5 Arial,sans-serif; letter-spacing:.03em; }
-    #felipe-bogo-classic-cv .bogo-languages { display:flex; gap:3px; align-items:center; flex-shrink:0; }
-    #felipe-bogo-classic-cv .bogo-languages button { font:500 12px/1.5 Arial,sans-serif; border:0; background:transparent; color:var(--bogo-soft); padding:9px; border-radius:0; }
+    #felipe-bogo-classic-cv .bogo-header { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:.75rem 1.5rem; }
+    #felipe-bogo-classic-cv .bogo-brand { font:500 clamp(1.0625rem,.98rem + .3vw,1.25rem)/1.5 Arial,sans-serif; letter-spacing:.03em; }
+    #felipe-bogo-classic-cv .bogo-languages { display:flex; gap:.25rem; align-items:center; flex-shrink:0; }
+    #felipe-bogo-classic-cv .bogo-languages button { font:500 1rem/1.5 Arial,sans-serif; border:0; background:transparent; color:var(--bogo-soft); min-width:2.75rem; min-height:2.75rem; padding:.5rem; border-radius:0; }
     #felipe-bogo-classic-cv .bogo-languages button[aria-pressed="true"] { color:var(--bogo-blue); box-shadow:inset 0 -2px var(--bogo-blue); }
-    #felipe-bogo-classic-cv .bogo-nav { display:flex; flex-wrap:wrap; gap:9px 25px; padding:20px 0 17px; border-bottom:1px solid var(--bogo-line); }
-    #felipe-bogo-classic-cv .bogo-nav button { font:400 12px/1.5 Arial,sans-serif; color:var(--bogo-soft); padding:4px 0; background:transparent; border:0; }
+    #felipe-bogo-classic-cv .bogo-nav { display:flex; flex-wrap:wrap; gap:.5rem clamp(1rem,2.5vw,2.5rem); padding:1.25rem 0 1rem; border-bottom:1px solid var(--bogo-line); }
+    #felipe-bogo-classic-cv .bogo-nav button { font:400 clamp(1rem,.96rem + .15vw,1.125rem)/1.5 Arial,sans-serif; color:var(--bogo-soft); min-height:2.75rem; padding:.5rem 0; background:transparent; border:0; }
     #felipe-bogo-classic-cv .bogo-nav button[aria-current="page"] { color:var(--bogo-ink); text-decoration:underline; text-underline-offset:6px; }
-    #felipe-bogo-classic-cv .bogo-eyebrow { font:400 11px/1.5 Arial,sans-serif; text-transform:uppercase; letter-spacing:.13em; color:var(--bogo-soft); }
-    #felipe-bogo-classic-cv .bogo-hero { display:grid; grid-template-columns:1.05fr 1fr; align-items:center; gap:20px; padding:36px 0 28px; }
+    #felipe-bogo-classic-cv .bogo-eyebrow { font:400 1rem/1.5 Arial,sans-serif; text-transform:uppercase; letter-spacing:.1em; color:var(--bogo-soft); }
+    #felipe-bogo-classic-cv .bogo-hero { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); align-items:center; gap:clamp(1.5rem,4vw,4.5rem); padding:clamp(2rem,5vw,4.5rem) 0 clamp(1.75rem,4vw,3rem); }
     #felipe-bogo-classic-cv .bogo-intro { min-width:0; }
-    #felipe-bogo-classic-cv .bogo-intro h1 { font:400 45px/1.12 Georgia,serif; letter-spacing:-.035em; margin:15px 0 18px; }
-    #felipe-bogo-classic-cv .bogo-copy { font:400 16px/1.7 Georgia,serif; max-width:42ch; color:var(--bogo-soft); }
+    #felipe-bogo-classic-cv .bogo-intro h1 { font:400 clamp(2.5rem,1.75rem + 4vw,5rem)/1.1 Georgia,serif; letter-spacing:-.035em; margin:0 0 1.5rem; overflow-wrap:anywhere; }
+    #felipe-bogo-classic-cv .bogo-copy { font:400 var(--bogo-reading-size)/1.7 Georgia,serif; max-width:42ch; color:var(--bogo-soft); }
     #felipe-bogo-classic-cv .bogo-figure { margin:0; min-width:0; color:var(--bogo-blue); }
-    #felipe-bogo-classic-cv .bogo-surface { display:block; width:100%; height:280px; }
+    #felipe-bogo-classic-cv .bogo-surface { display:block; width:100%; height:clamp(17rem,32vw,28rem); }
     #felipe-bogo-classic-cv a { color:var(--bogo-blue); text-decoration-thickness:1px; text-underline-offset:3px; overflow-wrap:anywhere; }
-    #felipe-bogo-classic-cv .bogo-profile-links { display:flex; flex-wrap:wrap; gap:12px; padding:0 0 26px; font:400 12px/1.6 Arial,sans-serif; }
-    #felipe-bogo-classic-cv .bogo-cv-button { display:inline-flex; align-items:center; justify-content:center; min-height:38px; padding:8px 18px; border:1px solid var(--bogo-line); background:var(--bogo-paper); text-decoration:none; }
-    #felipe-bogo-classic-cv .bogo-bio { padding:0 0 28px; }
-    #felipe-bogo-classic-cv .bogo-bio p { font:400 15px/1.8 Georgia,serif; color:var(--bogo-soft); max-width:70ch; margin-top:12px; }
-    #felipe-bogo-classic-cv .bogo-education { padding:0 0 32px; }
-    #felipe-bogo-classic-cv .bogo-education h2 { font:400 23px/1.4 Georgia,serif; margin:0 0 16px; }
+    #felipe-bogo-classic-cv .bogo-profile-links { display:flex; flex-wrap:wrap; gap:.75rem; padding:0 0 2.5rem; font:400 1rem/1.6 Arial,sans-serif; }
+    #felipe-bogo-classic-cv .bogo-cv-button { display:inline-flex; align-items:center; justify-content:center; min-height:2.75rem; padding:.625rem 1.25rem; border:1px solid var(--bogo-line); background:var(--bogo-paper); text-decoration:none; }
+    #felipe-bogo-classic-cv .bogo-bio { padding:0 0 1.75rem; }
+    #felipe-bogo-classic-cv .bogo-bio p { font:400 var(--bogo-reading-size)/1.8 Georgia,serif; color:var(--bogo-soft); max-width:65ch; margin-top:1rem; }
+    #felipe-bogo-classic-cv .bogo-education { padding:0 0 1rem; }
+    #felipe-bogo-classic-cv .bogo-education h2 { font:400 clamp(1.5rem,1.3rem + .6vw,2rem)/1.4 Georgia,serif; margin:0 0 1.25rem; }
     #felipe-bogo-classic-cv .bogo-education-list { margin:0; padding:0; list-style:none; }
-    #felipe-bogo-classic-cv .bogo-education-list li { display:grid; grid-template-columns:100px minmax(0,1fr); gap:12px; padding:11px 0; border-top:1px solid var(--bogo-line); }
-    #felipe-bogo-classic-cv .bogo-education-date { font:400 12px/1.7 Arial,sans-serif; color:var(--bogo-soft); }
-    #felipe-bogo-classic-cv .bogo-education-main { font:400 15px/1.5 Georgia,serif; }
-    #felipe-bogo-classic-cv .bogo-education-detail { display:block; font:400 12px/1.7 Arial,sans-serif; color:var(--bogo-soft); margin-top:4px; }
-    #felipe-bogo-classic-cv .bogo-footer { border-top:1px solid var(--bogo-line); padding-top:23px; display:grid; grid-template-columns:1fr 1fr; gap:30px; }
-    #felipe-bogo-classic-cv .bogo-footer h2 { font:400 21px/1.3 Georgia,serif; margin-bottom:9px; }
-    #felipe-bogo-classic-cv .bogo-footer p { font:400 13px/1.7 Arial,sans-serif; color:var(--bogo-soft); }
-    #felipe-bogo-classic-cv .bogo-inline { border:0; background:transparent; color:var(--bogo-blue); font:400 12px/1.5 Arial,sans-serif; padding:12px 0 2px; }
-    #felipe-bogo-classic-cv .bogo-page { padding:38px 0 22px; }
-    #felipe-bogo-classic-cv .bogo-page h1 { font:400 40px/1.15 Georgia,serif; margin:16px 0 24px; overflow-wrap:anywhere; }
-    #felipe-bogo-classic-cv .bogo-page > p { max-width:60ch; font:400 16px/1.8 Georgia,serif; color:var(--bogo-soft); }
-    #felipe-bogo-classic-cv .bogo-section-title { font:400 23px/1.4 Georgia,serif; margin:32px 0 0; }
-    #felipe-bogo-classic-cv .bogo-list { list-style:none; padding:0; margin:24px 0 0; }
-    #felipe-bogo-classic-cv .bogo-list > li { padding:20px 0; border-top:1px solid var(--bogo-line); }
-    #felipe-bogo-classic-cv .bogo-item-title { font:400 19px/1.5 Georgia,serif; overflow-wrap:anywhere; }
-    #felipe-bogo-classic-cv .bogo-item-detail { font:400 13px/1.75 Arial,sans-serif; color:var(--bogo-soft); margin-top:8px; overflow-wrap:anywhere; white-space:pre-line; }
-    #felipe-bogo-classic-cv .bogo-item-links { display:flex; flex-wrap:wrap; gap:10px 20px; margin-top:12px; font:400 12px/1.6 Arial,sans-serif; }
-    #felipe-bogo-classic-cv .bogo-course-row { display:grid; grid-template-columns:48px 1fr auto; gap:14px; margin-top:28px; padding:20px 0; border-top:1px solid var(--bogo-line); border-bottom:1px solid var(--bogo-line); align-items:center; font:400 13px/1.6 Arial,sans-serif; }
-    #felipe-bogo-classic-cv .bogo-number { font:400 28px/1.4 Georgia,serif; color:var(--bogo-blue); }
-    #felipe-bogo-classic-cv .bogo-course-row small { display:block; color:var(--bogo-soft); font:400 11px/1.6 Arial,sans-serif; }
+    #felipe-bogo-classic-cv .bogo-education-list li { display:grid; grid-template-columns:7.5rem minmax(0,1fr); gap:1rem; padding:1rem 0; border-top:1px solid var(--bogo-line); }
+    #felipe-bogo-classic-cv .bogo-education-date { font:400 1rem/1.7 Arial,sans-serif; color:var(--bogo-soft); }
+    #felipe-bogo-classic-cv .bogo-education-main { font:400 var(--bogo-reading-size)/1.5 Georgia,serif; }
+    #felipe-bogo-classic-cv .bogo-education-detail { display:block; font:400 1rem/1.7 Arial,sans-serif; color:var(--bogo-soft); margin-top:.375rem; }
+    #felipe-bogo-classic-cv .bogo-page { padding:clamp(2rem,4vw,3rem) 0 1.5rem; }
+    #felipe-bogo-classic-cv .bogo-page h1 { font:400 clamp(2rem,1.5rem + 2vw,3.5rem)/1.15 Georgia,serif; margin:1rem 0 1.5rem; overflow-wrap:anywhere; }
+    #felipe-bogo-classic-cv .bogo-page > p { max-width:65ch; font:400 var(--bogo-reading-size)/1.8 Georgia,serif; color:var(--bogo-soft); }
+    #felipe-bogo-classic-cv .bogo-section-title { font:400 clamp(1.5rem,1.3rem + .6vw,2rem)/1.4 Georgia,serif; margin:2.5rem 0 0; }
+    #felipe-bogo-classic-cv .bogo-list { list-style:none; padding:0; margin:1.5rem 0 0; }
+    #felipe-bogo-classic-cv .bogo-list > li { padding:1.5rem 0; border-top:1px solid var(--bogo-line); }
+    #felipe-bogo-classic-cv .bogo-item-title { font:400 clamp(1.25rem,1.125rem + .4vw,1.5rem)/1.5 Georgia,serif; overflow-wrap:anywhere; }
+    #felipe-bogo-classic-cv .bogo-item-detail { font:400 1.0625rem/1.75 Arial,sans-serif; color:var(--bogo-soft); max-width:72ch; margin-top:.75rem; overflow-wrap:anywhere; white-space:pre-line; }
+    #felipe-bogo-classic-cv .bogo-item-links { display:flex; flex-wrap:wrap; gap:.625rem 1.25rem; margin-top:.75rem; font:400 1rem/1.6 Arial,sans-serif; }
+    #felipe-bogo-classic-cv .bogo-course-row { display:grid; grid-template-columns:3rem minmax(0,1fr) auto; gap:1rem; margin-top:2rem; padding:1.5rem 0; border-top:1px solid var(--bogo-line); border-bottom:1px solid var(--bogo-line); align-items:center; font:400 var(--bogo-reading-size)/1.6 Arial,sans-serif; }
+    #felipe-bogo-classic-cv .bogo-course-row > span { min-width:0; overflow-wrap:anywhere; }
+    #felipe-bogo-classic-cv .bogo-number { font:400 2rem/1.4 Georgia,serif; color:var(--bogo-blue); }
+    #felipe-bogo-classic-cv .bogo-course-row small { display:block; color:var(--bogo-soft); font:400 1rem/1.6 Arial,sans-serif; }
     #felipe-bogo-classic-cv [hidden] { display:none !important; }
-    @media(max-width:700px) {
-      #felipe-bogo-classic-cv .bogo-site { padding:24px; }
-      #felipe-bogo-classic-cv .bogo-header { gap:12px; flex-wrap:wrap; }
-      #felipe-bogo-classic-cv .bogo-hero { grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:12px; }
-      #felipe-bogo-classic-cv .bogo-intro h1 { font-size:36px; }
-      #felipe-bogo-classic-cv .bogo-copy { font-size:14px; }
-      #felipe-bogo-classic-cv .bogo-surface { height:220px; }
-      #felipe-bogo-classic-cv .bogo-footer { gap:20px; }
-      #felipe-bogo-classic-cv .bogo-nav { gap:9px 18px; }
+    @media(max-width:56rem) {
+      #felipe-bogo-classic-cv .bogo-hero { grid-template-columns:minmax(0,1fr); gap:1.5rem; }
+      #felipe-bogo-classic-cv .bogo-copy { max-width:65ch; }
+      #felipe-bogo-classic-cv .bogo-figure { width:100%; max-width:38rem; justify-self:center; }
     }
-    @media(max-width:460px) {
-      #felipe-bogo-classic-cv .bogo-site { padding:22px; }
-      #felipe-bogo-classic-cv .bogo-brand { font-size:13px; }
-      #felipe-bogo-classic-cv .bogo-hero { grid-template-columns:1fr; gap:0; padding-top:25px; }
-      #felipe-bogo-classic-cv .bogo-intro h1 { font-size:40px; }
-      #felipe-bogo-classic-cv .bogo-surface { height:230px; }
-      #felipe-bogo-classic-cv .bogo-figure { padding-top:24px; }
-      #felipe-bogo-classic-cv .bogo-footer { grid-template-columns:1fr; gap:24px; }
-      #felipe-bogo-classic-cv .bogo-education-list li { grid-template-columns:1fr; gap:3px; }
-      #felipe-bogo-classic-cv .bogo-course-row { grid-template-columns:35px minmax(0,1fr); }
+    @media(max-width:40rem) {
+      #felipe-bogo-classic-cv .bogo-education-list li { grid-template-columns:minmax(0,1fr); gap:.25rem; }
+      #felipe-bogo-classic-cv .bogo-course-row { grid-template-columns:2.5rem minmax(0,1fr); }
       #felipe-bogo-classic-cv .bogo-course-row > span:last-child { grid-column:2; }
-      #felipe-bogo-classic-cv .bogo-languages button, #felipe-bogo-classic-cv .bogo-nav button { min-height:36px; }
     }
-    @media(pointer:coarse) { #felipe-bogo-classic-cv button { min-height:44px; } #felipe-bogo-classic-cv .bogo-languages button { min-width:44px; } #felipe-bogo-classic-cv .bogo-profile-links a, #felipe-bogo-classic-cv .bogo-item-links a { min-height:44px; display:inline-flex; align-items:center; } }
+    @media(pointer:coarse) { #felipe-bogo-classic-cv .bogo-item-links a { min-height:2.75rem; display:inline-flex; align-items:center; } }
   </style>
   <main class="bogo-site" lang="pt-BR">
     <header class="bogo-header">
@@ -103,7 +87,6 @@
     <div class="bogo-home">
       <div class="bogo-hero">
         <div class="bogo-intro">
-          <div class="bogo-eyebrow" data-text="eyebrow">Matemática</div>
           <h1>Felipe G.<br>Bogo</h1>
           <p class="bogo-copy" data-text="intro">Sou matemático, com interesse principal em análise geométrica e suas conexões com outras áreas.</p>
         </div>
@@ -114,10 +97,6 @@
       <div class="bogo-bio"></div>
       <div class="bogo-profile-links"></div>
       <section class="bogo-education"></section>
-      <div class="bogo-footer">
-        <section><h2 data-text="notes">Notas de aula</h2><p data-text="notesText">Matemática para ler, estudar e revisitar.</p><button class="bogo-inline bogo-control" type="button" data-open="notes" data-text="exploreNotes">Explorar as notas →</button></section>
-        <section><h2 data-text="doctrine">Curso de Doutrina</h2><p data-text="courseText">Programa, notas de aula e leituras complementares.</p><button class="bogo-inline bogo-control" type="button" data-open="course" data-text="exploreCourse">Acessar o curso →</button></section>
-      </div>
     </div>
     <section class="bogo-page" aria-live="polite" hidden></section>
   </main>
@@ -131,7 +110,7 @@
           en:'I am a PhD candidate in Mathematics at Universidade Federal Fluminense (UFF), advised by Sérgio de Moura Almaraz. My research focuses on differential geometry and geometric analysis, particularly the singular Yamabe–Escobar problem.\n\nMy academic experience includes a research visit to Nanjing University (2025–2026), working with Chen XueZhang, and a master’s degree at Universidade Estadual de Maringá (UEM), advised by Ryuichi Fukuoka.'
         },
         homeLinks:[
-          // Copy your compiled CV to docs/CV_Felipe_G_Bogo.pdf.
+          // Supplied compiled CV; keep this relative path when updating the document.
           {label:'CV',href:'docs/CV_Felipe_G_Bogo.pdf'},
           {label:'CV Lattes',href:'http://lattes.cnpq.br/1234983010931309'}
         ],
@@ -203,8 +182,11 @@
         try { localStorage.setItem(preferenceKey,state.lang); } catch {}
       }
       function makeLink(link) {
-        const a=document.createElement('a');a.textContent=localize(link.label);a.href=link.href;a.className='bogo-control';if(link.label==='CV')a.type='application/pdf';
-        if(/^https?:/i.test(link.href)){a.target='_blank';a.rel='noopener noreferrer';}
+        const a=document.createElement('a');a.textContent=localize(link.label);a.href=link.href;a.className='bogo-control';
+        const isPdf=/\.pdf(?:[?#]|$)/i.test(link.href);
+        const isDocument=isPdf||/\.(?:docx?|pptx?|xlsx?|odt|ods|odp|tex)(?:[?#]|$)/i.test(link.href)||/^docs\//i.test(link.href);
+        if(isPdf)a.type='application/pdf';
+        if(!/^mailto:/i.test(link.href)&&(/^https?:/i.test(link.href)||isDocument)){a.target='_blank';a.rel='noopener noreferrer';}
         return a;
       }
       function appendItems(parent,items) {

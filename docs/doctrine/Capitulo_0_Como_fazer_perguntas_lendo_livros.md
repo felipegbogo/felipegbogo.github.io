@@ -70,6 +70,18 @@ Por fim, podemos perguntar como aquilo que estudamos se torna presente na vida. 
 
 Esse aprofundamento pode ocorrer lentamente. Há verdades que compreendemos melhor depois de anos de estudo, oração e esforço. O aprendizado também acontece nos dias comuns, quando procuramos agir com fidelidade sem experimentar qualquer entusiasmo especial.
 
+### O que podemos concluir sobre a doutrina
+
+Podemos agora voltar à pergunta que nos trouxe até aqui: o que é isto — a doutrina? Partimos da palavra, esclarecemos o que procurávamos saber e consideramos a relação entre o ensinamento e quem o recebe. A partir desse exercício inspirado na maneira de perguntar de Heidegger, podemos propor a seguinte conclusão:
+
+**A doutrina é um ensinamento articulado e transmitido acerca de determinada realidade, que oferece um caminho para compreendê-la. Ao aprendê-la, somos convidados a acompanhar esse caminho e a dirigir nossa atenção àquilo que ela procura dar a conhecer.**
+
+Vamos olhar com cuidado para essa formulação. Uma doutrina reúne afirmações que podemos registrar, estudar e transmitir. Mas essas afirmações falam de alguma coisa: Deus, o homem, a natureza, a justiça. Compreendê-las exige perguntar o que dizem sobre aquilo de que tratam e quais razões apresentam. É nessa passagem das palavras para o que elas procuram esclarecer que a leitura se torna uma investigação.
+
+A ideia de correspondência nos ajuda a perceber o que está em jogo: quem aprende procura responder, com sua própria compreensão, à questão que o ensinamento apresenta. Para isso, precisa escutar, reconhecer a disposição com que se aproxima do assunto e acompanhar o caminho proposto. O encontro entre o que aprende e aquilo que vive pode, por sua vez, abrir novas perguntas. Assim se articulam, neste exercício, a escuta, a disposição, o caminho e a experiência.[^1]
+
+No caso da doutrina católica, esse ensinamento nos introduz na compreensão da fé recebida pela Igreja e nos orienta a viver de acordo com ela. Seu fundamento está na Revelação divina; nossa tarefa é procurar compreender com fidelidade aquilo que recebemos e responder a Deus com a inteligência, a vontade e a vida.[^2]
+
 ## 4. São Tomás de Aquino e o trabalho da inteligência
 
 Ao estudar São Tomás de Aquino, gostaria que prestássemos atenção ao modo como ele distingue as questões e examina os argumentos. Muitas vezes, uma dificuldade permanece porque reunimos coisas diferentes sob a mesma palavra ou porque exigimos de uma resposta algo que ela não pretende demonstrar.

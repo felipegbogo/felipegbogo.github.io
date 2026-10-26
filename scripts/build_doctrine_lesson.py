@@ -8,7 +8,9 @@ This dependency-free renderer supports the Markdown used in the source lesson:
 headings, paragraphs, emphasis, links, inline code, and numbered footnotes.
 Raw HTML is escaped. Only HTTP(S) links are emitted as external links. The
 original Markdown stays in docs/doctrine/; no browser fetch or Markdown library
-is needed to read the generated lesson.
+is needed to read the generated lesson. The script also updates index.html with
+a content hash in the lesson script URL, so a new lesson cannot reuse the old
+JavaScript file from the browser's cache after the page is reloaded.
 """
 
 from __future__ import annotations
@@ -26,6 +28,7 @@ from urllib.parse import urlsplit
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs/doctrine/Capitulo_0_Como_fazer_perguntas_lendo_livros.md"
 OUTPUT = ROOT / "assets/doctrine-lesson.js"
+ENTRY = ROOT / "index.html"
 PREFIX = "lesson-0-"
 FOOTNOTE = re.compile(r"\[\^([A-Za-z0-9_-]+)\]")
 DEFINITION = re.compile(r"^\[\^([A-Za-z0-9_-]+)\]:\s*(.*)$")
@@ -179,14 +182,27 @@ def build() -> dict[str, object]:
         "html": rendered,
     }
     payload = json.dumps(data, ensure_ascii=False, indent=2).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
-    OUTPUT.write_text(
+    javascript = (
         "/* Generated from the original Aula 0 Markdown by scripts/build_doctrine_lesson.py. */\n"
-        "window.BogoDoctrineLesson = Object.freeze(" + payload + ");\n",
-        encoding="utf-8",
+        "window.BogoDoctrineLesson = Object.freeze(" + payload + ");\n"
     )
+    asset_version = hashlib.sha256(javascript.encode("utf-8")).hexdigest()[:12]
+    entry = ENTRY.read_text(encoding="utf-8")
+    updated_entry, count = re.subn(
+        r'(<script src="assets/doctrine-lesson\.js)(?:\?[^\"]*)?(\"></script>)',
+        lambda match: f"{match.group(1)}?v={asset_version}{match.group(2)}",
+        entry,
+    )
+    if count != 1:
+        raise ValueError("Expected exactly one lesson script tag in index.html; no files were written.")
+    OUTPUT.write_text(javascript, encoding="utf-8")
+    if updated_entry != entry:
+        ENTRY.write_text(updated_entry, encoding="utf-8")
     return {
         "source": str(SOURCE),
         "output": str(OUTPUT),
+        "entry": str(ENTRY),
+        "asset_version": asset_version,
         "title": title,
         "source_bytes": len(source_bytes),
         "source_sha256": data["sourceSha256"],

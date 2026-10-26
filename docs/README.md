@@ -1,5 +1,7 @@
 # CV and Course Documents
 
+The PDF notes for Lesson 0 are available at `doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf`. The course card provides separate actions for reading the lesson on the website and downloading these notes.
+
 This directory includes the compiled CV:
 
 `CV_Felipe_G_Bogo.pdf`

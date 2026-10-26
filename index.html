@@ -64,20 +64,24 @@
     #felipe-bogo-classic-cv .bogo-item-detail { font:400 1.0625rem/1.75 Arial,sans-serif; color:var(--bogo-soft); max-width:72ch; margin-top:.75rem; overflow-wrap:anywhere; white-space:pre-line; }
     #felipe-bogo-classic-cv .bogo-item-links { display:flex; flex-wrap:wrap; gap:.625rem 1.25rem; margin-top:.75rem; font:400 1rem/1.6 Arial,sans-serif; }
     #felipe-bogo-classic-cv .bogo-lesson { margin-top:2rem; border:1px solid var(--bogo-line); }
-    #felipe-bogo-classic-cv .bogo-lesson-summary { list-style:none; padding:clamp(1rem,2.5vw,1.5rem); cursor:pointer; }
-    #felipe-bogo-classic-cv .bogo-lesson-summary::-webkit-details-marker { display:none; }
+    #felipe-bogo-classic-cv .bogo-lesson-header { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:1rem; align-items:center; padding:clamp(1rem,2.5vw,1.5rem); }
+    #felipe-bogo-classic-cv .bogo-lesson-heading { min-width:0; }
+    #felipe-bogo-classic-cv .bogo-lesson-summary { display:block; width:100%; padding:0; border:0; background:transparent; color:inherit; text-align:left; cursor:pointer; }
     #felipe-bogo-classic-cv .bogo-lesson-summary:hover { background:color-mix(in srgb,var(--bogo-blue) 4%,var(--bogo-paper)); }
     #felipe-bogo-classic-cv .bogo-lesson-summary:focus-visible { outline:2px solid var(--bogo-blue); outline-offset:3px; }
     #felipe-bogo-classic-cv .bogo-lesson-summary-content { display:grid; grid-template-columns:3rem minmax(0,1fr) auto; gap:1rem; align-items:center; font:400 clamp(1.25rem,1.125rem + .4vw,1.5rem)/1.5 Georgia,serif; }
     #felipe-bogo-classic-cv .bogo-lesson-name { display:block; overflow-wrap:anywhere; }
     #felipe-bogo-classic-cv .bogo-lesson-label { display:block; margin-top:.375rem; color:var(--bogo-soft); font:400 1rem/1.6 Arial,sans-serif; }
-    #felipe-bogo-classic-cv .bogo-lesson-action { display:flex; gap:.75rem; align-items:center; color:var(--bogo-blue); font:400 1rem/1.5 Arial,sans-serif; white-space:nowrap; }
+    #felipe-bogo-classic-cv .bogo-lesson-action, #felipe-bogo-classic-cv .bogo-lesson-download { display:inline-flex; gap:.625rem; align-items:center; justify-content:center; min-height:2.75rem; padding:.625rem 1rem; border:1px solid var(--bogo-line); background:var(--bogo-paper); color:var(--bogo-blue); font:400 1rem/1.5 Arial,sans-serif; white-space:nowrap; }
+    #felipe-bogo-classic-cv .bogo-lesson-download { text-decoration:none; }
+    #felipe-bogo-classic-cv .bogo-lesson-download:hover { border-color:var(--bogo-blue); }
+    #felipe-bogo-classic-cv .bogo-lesson-download:focus-visible { outline:2px solid var(--bogo-blue); outline-offset:3px; }
     #felipe-bogo-classic-cv .bogo-lesson-chevron { display:block; width:1.25rem; height:1.25rem; flex-shrink:0; }
     #felipe-bogo-classic-cv .bogo-lesson-close { display:none; }
-    #felipe-bogo-classic-cv .bogo-lesson[open] .bogo-lesson-summary { border-bottom:1px solid var(--bogo-line); }
-    #felipe-bogo-classic-cv .bogo-lesson[open] .bogo-lesson-open { display:none; }
-    #felipe-bogo-classic-cv .bogo-lesson[open] .bogo-lesson-close { display:inline; }
-    #felipe-bogo-classic-cv .bogo-lesson[open] .bogo-lesson-chevron { transform:rotate(180deg); }
+    #felipe-bogo-classic-cv .bogo-lesson.is-open .bogo-lesson-header { border-bottom:1px solid var(--bogo-line); }
+    #felipe-bogo-classic-cv .bogo-lesson.is-open .bogo-lesson-open { display:none; }
+    #felipe-bogo-classic-cv .bogo-lesson.is-open .bogo-lesson-close { display:inline; }
+    #felipe-bogo-classic-cv .bogo-lesson.is-open .bogo-lesson-chevron { transform:rotate(180deg); }
     #felipe-bogo-classic-cv .bogo-lesson-hint { padding:1rem clamp(1rem,2.5vw,1.5rem) 0; color:var(--bogo-soft); font:400 1rem/1.6 Arial,sans-serif; }
     #felipe-bogo-classic-cv .bogo-lesson-reader { max-height:min(65vh,45rem); overflow-y:auto; overscroll-behavior-y:contain; scrollbar-gutter:stable; padding:1rem clamp(1rem,3vw,2.5rem) 2rem; }
     #felipe-bogo-classic-cv .bogo-lesson-reader:focus-visible { outline:2px solid var(--bogo-blue); outline-offset:-3px; }
@@ -101,8 +105,10 @@
       #felipe-bogo-classic-cv .bogo-page-figure { width:min(100%,22rem); justify-self:center; }
       #felipe-bogo-classic-cv .bogo-page-surface { height:12rem; }
       #felipe-bogo-classic-cv .bogo-education-list li { grid-template-columns:minmax(0,1fr); gap:.25rem; }
-      #felipe-bogo-classic-cv .bogo-lesson-summary-content { grid-template-columns:2rem minmax(0,1fr) 1.25rem; gap:.75rem; font-size:1.125rem; }
-      #felipe-bogo-classic-cv .bogo-lesson-action-copy { display:none; }
+      #felipe-bogo-classic-cv .bogo-lesson-header { grid-template-columns:minmax(0,1fr); }
+      #felipe-bogo-classic-cv .bogo-lesson-summary-content { grid-template-columns:2rem minmax(0,1fr); gap:.75rem; font-size:1.125rem; }
+      #felipe-bogo-classic-cv .bogo-lesson-action { grid-column:2; justify-self:start; }
+      #felipe-bogo-classic-cv .bogo-lesson-download { justify-self:start; margin-inline-start:2.75rem; }
       #felipe-bogo-classic-cv .bogo-lesson-label { font-size:.9375rem; }
     }
     @media(pointer:coarse) { #felipe-bogo-classic-cv .bogo-item-links a { min-height:2.75rem; display:inline-flex; align-items:center; } }
@@ -133,7 +139,7 @@
     <section class="bogo-page" aria-live="polite" hidden></section>
   </main>
   <script src="assets/surfaces.js"></script>
-  <script src="assets/doctrine-lesson.js?v=286438aca8ae"></script>
+  <script src="assets/doctrine-lesson.js?v=86c4fbc6e067"></script>
   <script>
     (() => {
       const root = document.getElementById('felipe-bogo-classic-cv');
@@ -201,8 +207,8 @@
         ]
       };
       const text = {
-        pt:{eyebrow:'Matemática',intro:'Sou matemático, com interesse principal em análise geométrica e suas conexões com outras áreas.',notes:'Notas de aula',notesText:'Matemática para ler, estudar e revisitar.',doctrine:'Curso de Doutrina',courseText:'Programa, notas de aula e leituras complementares.',exploreNotes:'Explorar as notas →',exploreCourse:'Acessar o curso →',nav:['Início','Publicações','Notas de aula','Curso de Doutrina','Contato'],publicationsIntro:'Artigos e trabalhos acadêmicos.',notesIntro:'Notas organizadas por disciplina e assunto.',contactIntro:'Contato e informações institucionais.',courseIntro:'Programa, bibliografia e materiais de cada encontro.',lesson:'Como fazer perguntas lendo livros?',lessonLabel:'Aula 0',lessonOpen:'Abrir aula',lessonClose:'Fechar aula',lessonReaderHint:'Role dentro da caixa para ler a aula completa.',documentLanguage:'Documento em português',courseLabel:'Formação católica',researchLabel:'Pesquisa',teachingLabel:'Ensino',contactLabel:'Contato',materialsSoon:'Material em breve'},
-        en:{eyebrow:'Mathematics',intro:'I am a mathematician mainly interested in geometric analysis and its connection to other fields.',notes:'Class Notes',notesText:'Mathematics to read, study, and revisit.',doctrine:'Catholic Doctrine',courseText:'Syllabus, lecture notes, and further reading.',exploreNotes:'Explore the notes →',exploreCourse:'Explore the course →',nav:['Home','Publications','Class Notes','Catholic Doctrine','Contact'],publicationsIntro:'Articles and academic work.',notesIntro:'Notes organized by course and subject.',contactIntro:'Contact and institutional information.',courseIntro:'Syllabus, bibliography, and materials for each session.',lesson:'How to ask questions while reading books?',lessonLabel:'Lesson 0',lessonOpen:'Read lesson',lessonClose:'Close lesson',lessonReaderHint:'Scroll inside the box to read the full lesson.',documentLanguage:'Document in Portuguese',courseLabel:'Catholic formation',researchLabel:'Research',teachingLabel:'Teaching',contactLabel:'Contact',materialsSoon:'Material coming soon'}
+        pt:{eyebrow:'Matemática',intro:'Sou matemático, com interesse principal em análise geométrica e suas conexões com outras áreas.',notes:'Notas de aula',notesText:'Matemática para ler, estudar e revisitar.',doctrine:'Curso de Doutrina',courseText:'Programa, notas de aula e leituras complementares.',exploreNotes:'Explorar as notas →',exploreCourse:'Acessar o curso →',nav:['Início','Publicações','Notas de aula','Curso de Doutrina','Contato'],publicationsIntro:'Artigos e trabalhos acadêmicos.',notesIntro:'Notas organizadas por disciplina e assunto.',contactIntro:'Contato e informações institucionais.',courseIntro:'Programa, bibliografia e materiais de cada encontro.',lesson:'Como fazer perguntas lendo livros?',lessonLabel:'Aula 0',lessonOpen:'Abrir aula',lessonClose:'Fechar aula',lessonDownload:'Baixar aula',lessonDownloadLabel:'Baixar aula em PDF',lessonReaderHint:'Role dentro da caixa para ler a aula completa.',documentLanguage:'Documento em português',courseLabel:'Formação católica',researchLabel:'Pesquisa',teachingLabel:'Ensino',contactLabel:'Contato',materialsSoon:'Material em breve'},
+        en:{eyebrow:'Mathematics',intro:'I am a mathematician mainly interested in geometric analysis and its connection to other fields.',notes:'Class Notes',notesText:'Mathematics to read, study, and revisit.',doctrine:'Catholic Doctrine',courseText:'Syllabus, lecture notes, and further reading.',exploreNotes:'Explore the notes →',exploreCourse:'Explore the course →',nav:['Home','Publications','Class Notes','Catholic Doctrine','Contact'],publicationsIntro:'Articles and academic work.',notesIntro:'Notes organized by course and subject.',contactIntro:'Contact and institutional information.',courseIntro:'Syllabus, bibliography, and materials for each session.',lesson:'How to ask questions while reading books?',lessonLabel:'Lesson 0',lessonOpen:'Read lesson',lessonClose:'Close lesson',lessonDownload:'Download lesson',lessonDownloadLabel:'Download lesson PDF',lessonReaderHint:'Scroll inside the box to read the full lesson.',documentLanguage:'Document in Portuguese',courseLabel:'Catholic formation',researchLabel:'Research',teachingLabel:'Teaching',contactLabel:'Contact',materialsSoon:'Material coming soon'}
       };
       const pages=['home','publications','notes','course','contact'];
       // Query routes work on GitHub Pages without server rewrites. The hash
@@ -299,9 +305,11 @@
           panel.append(header);
           if(state.page==='course') {
             const lesson=window.BogoDoctrineLesson;
-            const details=document.createElement('details');details.className='bogo-lesson';details.open=state.lessonOpen;
-            const summary=document.createElement('summary');summary.className='bogo-lesson-summary';
-            const summaryHeading=document.createElement('h2');summaryHeading.className='bogo-lesson-summary-content';
+            const card=document.createElement('section');card.className=`bogo-lesson${state.lessonOpen?' is-open':''}`;
+            const cardHeader=document.createElement('div');cardHeader.className='bogo-lesson-header';
+            const heading=document.createElement('h2');heading.className='bogo-lesson-heading';
+            const summary=document.createElement('button');summary.type='button';summary.className='bogo-lesson-summary';summary.setAttribute('aria-expanded',String(state.lessonOpen));summary.setAttribute('aria-controls','lesson-zero-body');
+            const summaryHeading=document.createElement('span');summaryHeading.className='bogo-lesson-summary-content';
             const number=document.createElement('span');number.className='bogo-number';number.textContent='00';number.setAttribute('aria-hidden','true');
             const item=document.createElement('span');
             const name=document.createElement('span');name.className='bogo-lesson-name';name.id='lesson-zero-title';name.textContent=state.lang==='pt'?lesson.title:d.lesson;
@@ -311,13 +319,16 @@
             for(const [className,label] of [['bogo-lesson-open',d.lessonOpen],['bogo-lesson-close',d.lessonClose]]){const span=document.createElement('span');span.className=className;span.textContent=label;actionCopy.append(span);}
             const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');icon.classList.add('bogo-lesson-chevron');icon.setAttribute('viewBox','0 0 20 20');icon.setAttribute('aria-hidden','true');
             const chevron=document.createElementNS('http://www.w3.org/2000/svg','path');chevron.setAttribute('d','M4 7L10 13L16 7');chevron.setAttribute('fill','none');chevron.setAttribute('stroke','currentColor');chevron.setAttribute('stroke-width','1.5');icon.append(chevron);
-            action.append(actionCopy,icon);summaryHeading.append(number,item,action);summary.append(summaryHeading);
+            action.append(actionCopy,icon);summaryHeading.append(number,item,action);summary.append(summaryHeading);heading.append(summary);
+            const download=document.createElement('a');download.className='bogo-lesson-download';download.href=lesson.pdfUrl;download.download=lesson.pdfFilename;download.type='application/pdf';download.target='_blank';download.rel='noopener noreferrer';download.textContent=d.lessonDownload;download.setAttribute('aria-label',d.lessonDownloadLabel);
+            cardHeader.append(heading,download);
+            const body=document.createElement('div');body.className='bogo-lesson-body';body.id='lesson-zero-body';body.hidden=!state.lessonOpen;
             const hint=document.createElement('p');hint.className='bogo-lesson-hint';hint.id='lesson-zero-hint';hint.textContent=d.lessonReaderHint;
             const reader=document.createElement('div');reader.className='bogo-lesson-reader';reader.tabIndex=0;reader.setAttribute('role','region');reader.setAttribute('aria-labelledby',name.id);reader.setAttribute('aria-describedby',hint.id);
             const documentText=document.createElement('article');documentText.className='bogo-lesson-text';documentText.lang=lesson.language;documentText.innerHTML=lesson.html;reader.append(documentText);
-            details.append(summary,hint,reader);panel.append(details);reader.scrollTop=state.lessonScroll;
-            details.addEventListener('toggle',()=>{state.lessonOpen=details.open;if(details.open)reader.scrollTop=state.lessonScroll;});
-            reader.addEventListener('scroll',()=>{if(details.open)state.lessonScroll=reader.scrollTop;});
+            body.append(hint,reader);card.append(cardHeader,body);panel.append(card);reader.scrollTop=state.lessonScroll;
+            summary.addEventListener('click',()=>{state.lessonOpen=!state.lessonOpen;body.hidden=!state.lessonOpen;card.classList.toggle('is-open',state.lessonOpen);summary.setAttribute('aria-expanded',String(state.lessonOpen));if(state.lessonOpen)reader.scrollTop=state.lessonScroll;});
+            reader.addEventListener('scroll',()=>{if(!body.hidden)state.lessonScroll=reader.scrollTop;});
           } else appendItems(panel,imported[state.page]);
         }
         const surface=article.querySelector('.bogo-surface');surface.setAttribute('aria-label',state.lang==='pt'?'Catenoide representado por curvas coordenadas':'Catenoid represented by coordinate curves');

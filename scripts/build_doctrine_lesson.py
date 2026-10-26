@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "docs/doctrine/Capitulo_0_Como_fazer_perguntas_lendo_livros.md"
 OUTPUT = ROOT / "assets/doctrine-lesson.js"
 ENTRY = ROOT / "index.html"
+PDF = ROOT / "docs/doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf"
 PREFIX = "lesson-0-"
 FOOTNOTE = re.compile(r"\[\^([A-Za-z0-9_-]+)\]")
 DEFINITION = re.compile(r"^\[\^([A-Za-z0-9_-]+)\]:\s*(.*)$")
@@ -153,6 +154,10 @@ class LessonRenderer:
 
 def build() -> dict[str, object]:
     source_bytes = SOURCE.read_bytes()
+    pdf_bytes = PDF.read_bytes()
+    if not pdf_bytes.startswith(b"%PDF-"):
+        raise ValueError("The lesson download must be a PDF file.")
+    pdf_sha256 = hashlib.sha256(pdf_bytes).hexdigest()
     lines = source_bytes.decode("utf-8").splitlines()
     definitions: dict[str, str] = {}
     body = []
@@ -179,6 +184,8 @@ def build() -> dict[str, object]:
         "language": "pt-BR",
         "sourcePath": SOURCE.relative_to(ROOT).as_posix(),
         "sourceSha256": hashlib.sha256(source_bytes).hexdigest(),
+        "pdfUrl": PDF.relative_to(ROOT).as_posix() + "?v=" + pdf_sha256[:12],
+        "pdfFilename": PDF.name,
         "html": rendered,
     }
     payload = json.dumps(data, ensure_ascii=False, indent=2).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
@@ -206,6 +213,8 @@ def build() -> dict[str, object]:
         "title": title,
         "source_bytes": len(source_bytes),
         "source_sha256": data["sourceSha256"],
+        "pdf_bytes": len(pdf_bytes),
+        "pdf_sha256": pdf_sha256,
         "footnotes": len(definitions),
         "footnote_references": sum(renderer.references.values()),
         "output_bytes": OUTPUT.stat().st_size,

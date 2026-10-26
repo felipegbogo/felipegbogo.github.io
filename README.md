@@ -25,7 +25,7 @@ Each section has a direct URL, so refreshing the page keeps the current section 
 - **Homepage:** a short biography, education and research visits, and links to my CV and Lattes profile.
 - **Publications:** published papers, ongoing doctoral research, and my master's dissertation and related materials.
 - **Class Notes:** mathematics notes and problem sets, currently covering algebra and topology.
-- **Catholic Doctrine:** Lesson 0, “Como fazer perguntas lendo livros?”, opens in an expandable card with a scrollable reading area, complete notes, and reference links. The lesson remains in its original Portuguese when the interface language changes.
+- **Catholic Doctrine:** Lesson 0, “Como fazer perguntas lendo livros?”, offers two actions: read the lesson in a scrollable panel or download the PDF. The lesson remains in its original Portuguese when the interface language changes.
 - **Contact:** email addresses and institutional information.
 
 ## Mathematical illustrations
@@ -51,6 +51,7 @@ The Costa illustration is generated numerically from its Weierstrass representat
 | `assets/surfaces/costa.svg` | Generated Costa illustration, with light and dark color schemes. |
 | `scripts/generate_costa.py` | Reproducible Costa generator and mathematical references. |
 | `docs/doctrine/Capitulo_0_Como_fazer_perguntas_lendo_livros.md` | Original Portuguese text of Lesson 0. |
+| `docs/doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf` | Downloadable PDF notes for Lesson 0. |
 | `assets/doctrine-lesson.js` | Formatted lesson content used by the inline reader. |
 | `scripts/build_doctrine_lesson.py` | Dependency-free generator for the formatted lesson. |
 | `docs/CV_Felipe_G_Bogo.pdf` | Compiled CV, opened in a new tab from the homepage. |

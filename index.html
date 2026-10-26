@@ -28,8 +28,8 @@
     #felipe-bogo-classic-cv .bogo-languages button { font:500 1rem/1.5 Arial,sans-serif; border:0; background:transparent; color:var(--bogo-soft); min-width:2.75rem; min-height:2.75rem; padding:.5rem; border-radius:0; }
     #felipe-bogo-classic-cv .bogo-languages button[aria-pressed="true"] { color:var(--bogo-blue); box-shadow:inset 0 -2px var(--bogo-blue); }
     #felipe-bogo-classic-cv .bogo-nav { display:flex; flex-wrap:wrap; gap:.5rem clamp(1rem,2.5vw,2.5rem); padding:1.25rem 0 1rem; border-bottom:1px solid var(--bogo-line); }
-    #felipe-bogo-classic-cv .bogo-nav button { font:400 clamp(1rem,.96rem + .15vw,1.125rem)/1.5 Arial,sans-serif; color:var(--bogo-soft); min-height:2.75rem; padding:.5rem 0; background:transparent; border:0; }
-    #felipe-bogo-classic-cv .bogo-nav button[aria-current="page"] { color:var(--bogo-ink); text-decoration:underline; text-underline-offset:6px; }
+    #felipe-bogo-classic-cv .bogo-nav a { font:400 clamp(1rem,.96rem + .15vw,1.125rem)/1.5 Arial,sans-serif; color:var(--bogo-soft); min-height:2.75rem; padding:.5rem 0; text-decoration:none; }
+    #felipe-bogo-classic-cv .bogo-nav a[aria-current="page"] { color:var(--bogo-ink); text-decoration:underline; text-underline-offset:6px; }
     #felipe-bogo-classic-cv .bogo-eyebrow { font:400 1rem/1.5 Arial,sans-serif; text-transform:uppercase; letter-spacing:.1em; color:var(--bogo-soft); }
     #felipe-bogo-classic-cv .bogo-hero { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(0,1fr); align-items:center; gap:clamp(1.5rem,4vw,4.5rem); padding:clamp(2rem,5vw,4.5rem) 0 clamp(1.75rem,4vw,3rem); }
     #felipe-bogo-classic-cv .bogo-intro { min-width:0; }
@@ -205,7 +205,23 @@
         en:{eyebrow:'Mathematics',intro:'I am a mathematician mainly interested in geometric analysis and its connection to other fields.',notes:'Class Notes',notesText:'Mathematics to read, study, and revisit.',doctrine:'Catholic Doctrine',courseText:'Syllabus, lecture notes, and further reading.',exploreNotes:'Explore the notes →',exploreCourse:'Explore the course →',nav:['Home','Publications','Class Notes','Catholic Doctrine','Contact'],publicationsIntro:'Articles and academic work.',notesIntro:'Notes organized by course and subject.',contactIntro:'Contact and institutional information.',courseIntro:'Syllabus, bibliography, and materials for each session.',lesson:'How to ask questions while reading books?',lessonLabel:'Lesson 0',lessonOpen:'Read lesson',lessonClose:'Close lesson',lessonReaderHint:'Scroll inside the box to read the full lesson.',documentLanguage:'Document in Portuguese',courseLabel:'Catholic formation',researchLabel:'Research',teachingLabel:'Teaching',contactLabel:'Contact',materialsSoon:'Material coming soon'}
       };
       const pages=['home','publications','notes','course','contact'];
-      const state={lang:'pt',page:'home',mesh:22,lessonOpen:false,lessonScroll:0};
+      // Query routes work on GitHub Pages without server rewrites. The hash
+      // remains available for the lesson's native footnote links.
+      const pageSlugs={home:'',publications:'publications',notes:'class-notes',course:'doctrine',contact:'contact'};
+      function lessonTarget() {
+        try {const id=decodeURIComponent(window.location.hash.slice(1));return id.startsWith('lesson-0-')?id:'';}catch{return '';}
+      }
+      function pageFromUrl() {
+        const slug=new URL(window.location.href).searchParams.get('page');
+        return pages.find(page=>pageSlugs[page]===slug)||(!slug&&lessonTarget()?'course':'home');
+      }
+      function pageUrl(page) {
+        const url=new URL(window.location.href);url.hash='';
+        if(page==='home')url.searchParams.delete('page');else url.searchParams.set('page',pageSlugs[page]);
+        return url.pathname+url.search;
+      }
+      const initialPage=pageFromUrl();
+      const state={lang:'pt',page:initialPage,mesh:22,lessonOpen:initialPage==='course'&&Boolean(lessonTarget()),lessonScroll:0};
       function localize(value) { return typeof value==='string'?value:value&&(value[state.lang]||value.en||value.pt)||''; }
       const preferenceKey='felipe-bogo-language';
       try {
@@ -238,10 +254,11 @@
       }
       function render() {
         const d=text[state.lang];article.lang=state.lang==='pt'?'pt-BR':'en';document.documentElement.lang=article.lang;
+        document.title=state.page==='home'?'Felipe G. Bogo':`${d.nav[pages.indexOf(state.page)]} · Felipe G. Bogo`;
         article.querySelectorAll('[data-text]').forEach(el=>{el.textContent=d[el.dataset.text];});
         article.querySelectorAll('[data-lang]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.lang===state.lang)));
         const nav=article.querySelector('.bogo-nav');nav.setAttribute('aria-label',state.lang==='pt'?'Navegação principal':'Main navigation');
-        nav.replaceChildren(...pages.map((page,i)=>{const b=document.createElement('button');b.type='button';b.className='bogo-control';b.dataset.open=page;b.textContent=d.nav[i];if(page===state.page)b.setAttribute('aria-current','page');return b;}));
+        nav.replaceChildren(...pages.map((page,i)=>{const a=document.createElement('a');a.className='bogo-control';a.dataset.open=page;a.href=pageUrl(page);a.textContent=d.nav[i];if(page===state.page)a.setAttribute('aria-current','page');return a;}));
         article.querySelector('.bogo-home').hidden=state.page!=='home';
         article.querySelector('.bogo-profile-links').replaceChildren(...imported.homeLinks.map(link=>{const a=makeLink(link);a.classList.add('bogo-cv-button');return a;}));
         const bio=article.querySelector('.bogo-bio');bio.replaceChildren();
@@ -308,10 +325,35 @@
         drawSurface();
       }
       root.addEventListener('click',e=>{
+        const link=e.target.closest('a[data-open]');
+        if(link&&root.contains(link)&&pages.includes(link.dataset.open)) {
+          if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+          e.preventDefault();
+          const page=link.dataset.open,url=new URL(pageUrl(page),window.location.href);
+          if(url.href!==window.location.href)window.history.pushState(null,'',url.href);
+          if(state.page!==page){state.page=page;render();}
+          window.scrollTo(0,0);
+          return;
+        }
         const b=e.target.closest('button');if(!b||!root.contains(b))return;
         if(b.dataset.lang==='pt'||b.dataset.lang==='en'){state.lang=b.dataset.lang;render();remember();}
-        if(pages.includes(b.dataset.open)){state.page=b.dataset.open;render();remember();}
       });
+      function restoreLessonTarget() {
+        if(state.page!=='course')return;
+        const id=lessonTarget(),target=id&&document.getElementById(id),reader=article.querySelector('.bogo-lesson-reader');
+        if(target&&reader&&reader.contains(target)){target.scrollIntoView({block:'nearest'});state.lessonScroll=reader.scrollTop;}
+      }
+      function syncLocation() {
+        const page=pageFromUrl();
+        // Hash-only history entries must not rebuild the lesson's DOM.
+        if(page!==state.page){state.page=page;render();}
+        if(page==='course'&&lessonTarget()) {
+          if(!state.lessonOpen){state.lessonOpen=true;render();}
+          window.requestAnimationFrame(restoreLessonTarget);
+        }
+      }
+      window.addEventListener('popstate',syncLocation);
+      window.addEventListener('hashchange',syncLocation);
       function project(u,v) {
         const x=Math.cosh(v)*Math.cos(u),y=Math.cosh(v)*Math.sin(u),z=v,yaw=.5,tilt=.48;
         const xp=x*Math.cos(yaw)-y*Math.sin(yaw),yp=x*Math.sin(yaw)+y*Math.cos(yaw);
@@ -332,6 +374,7 @@
         svg.replaceChildren(...elements);
       }
       render();
+      if(state.page==='course'&&lessonTarget())window.requestAnimationFrame(restoreLessonTarget);
       if('ResizeObserver' in window)new ResizeObserver(drawSurface).observe(root);
       else window.addEventListener('resize',drawSurface);
     })();

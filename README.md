@@ -10,6 +10,16 @@ The site brings together my academic work, teaching materials, and contact infor
 
 The layout adapts to desktop, tablet, and mobile screens, with fluid text sizes and support for light and dark color schemes. Visitors can switch between Portuguese and English; their language preference is saved in their browser. Linked documents retain their original language.
 
+Each section has a direct URL, so refreshing the page keeps the current section and browser Back/Forward navigation works. The menu also supports opening a section in a new tab.
+
+| Section | Direct link |
+| --- | --- |
+| Homepage | [Home](https://felipegbogo.github.io/) |
+| Publications | [Publications](https://felipegbogo.github.io/?page=publications) |
+| Class Notes | [Class Notes](https://felipegbogo.github.io/?page=class-notes) |
+| Catholic Doctrine | [Catholic Doctrine](https://felipegbogo.github.io/?page=doctrine) |
+| Contact | [Contact](https://felipegbogo.github.io/?page=contact) |
+
 ## Sections
 
 - **Homepage:** a short biography, education and research visits, and links to my CV and Lattes profile.

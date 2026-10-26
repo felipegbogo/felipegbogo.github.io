@@ -82,6 +82,22 @@ A ideia de correspondência nos ajuda a perceber o que está em jogo: quem apren
 
 No caso da doutrina católica, esse ensinamento nos introduz na compreensão da fé recebida pela Igreja e nos orienta a viver de acordo com ela. Seu fundamento está na Revelação divina; nossa tarefa é procurar compreender com fidelidade aquilo que recebemos e responder a Deus com a inteligência, a vontade e a vida.[^2]
 
+### Do estudo da doutrina à contemplação
+
+Se a doutrina nos oferece um ensinamento acerca de determinada realidade, aprender exige que dirijamos nossa atenção àquilo de que ela fala. Podemos, então, fazer uma nova pergunta: quando estudamos a doutrina católica, para quem estamos aprendendo a olhar?
+
+Essa pergunta nos ajuda a compreender a finalidade do nosso estudo. Ao procurar entender o que a Igreja ensina sobre Deus, procuramos conhecer melhor Aquele em quem cremos. As definições e os argumentos têm seu lugar nesse caminho: ajudam-nos a compreender o conteúdo da fé e a reconhecer o alcance daquilo que professamos.
+
+É aqui que nossa reflexão pode se aproximar da contemplação. Na carta pastoral de 16 de outubro de 2026, Monsenhor Fernando Ocáriz apresenta a contemplação como um olhar para a verdade que procede do amor.[^11] Conhecer e amar podem alimentar-se mutuamente: o amor desperta o desejo de conhecer, e o conhecimento pode aprofundar o amor.
+
+Pensemos na afirmação de que somos filhos de Deus. Podemos perguntar o que significa essa filiação, em que ela se fundamenta e quais consequências tem para nossa vida. Podemos também levar essa verdade à oração: “Senhor, o que significa viver hoje como teu filho?”. O conteúdo estudado torna-se, assim, matéria de diálogo com Deus e orientação para nossas escolhas.
+
+A aproximação pedagógica com Heidegger nos ajudou a perceber a importância de escutar e de acompanhar uma pergunta. A fé cristã nos conduz ao encontro com Deus, que se revela e nos chama. Nesse encontro, a contemplação é dom: nosso esforço de compreensão, acompanhado da oração e de uma vida de fé, pode dispor-nos a acolhê-lo, mas não o produz por si mesmo.[^11]
+
+Podemos, portanto, formular a finalidade deste curso: **estudar a doutrina para compreender melhor a fé, alimentar nossa oração e aprender a reconhecer, amar e servir a Deus na vida cotidiana.**
+
+Ao terminar uma leitura, além de perguntar “o que compreendi?”, podemos perguntar: “Como essa verdade pode entrar na minha conversa com Deus e na maneira como trato as pessoas?”.
+
 ## 4. São Tomás de Aquino e o trabalho da inteligência
 
 Ao estudar São Tomás de Aquino, gostaria que prestássemos atenção ao modo como ele distingue as questões e examina os argumentos. Muitas vezes, uma dificuldade permanece porque reunimos coisas diferentes sob a mesma palavra ou porque exigimos de uma resposta algo que ela não pretende demonstrar.
@@ -203,3 +219,5 @@ Ao iniciarmos cada leitura, gostaria que conservássemos essa disposição: aten
 [^9]: *Catecismo da Igreja Católica*, nn. 85–95, sobre o Magistério, os dogmas e a transmissão da fé ([texto em português](https://www.vatican.va/archive/cathechism_po/index_new/p1s1c2_50-141_po.html)); e nn. 891–892, sobre o exercício do Magistério e as formas de assentimento ([texto em português](https://www.vatican.va/archive/cathechism_po/index_new/p1s2cap3_683-1065_po.html)).
 
 [^10]: *Catecismo da Igreja Católica*, nn. 302–314, sobre a providência, as causas criadas e o problema do mal. [Texto em português](https://www.vatican.va/archive/cathechism_po/index_new/p1s2c1_198-421_po.html).
+
+[^11]: OCÁRIZ, Fernando. *Carta pastoral sobre a contemplação*, 16 de outubro de 2026, nn. 2, 10–11 e 14–16. [Texto no site do Opus Dei](https://opusdei.org/pt-br/article/carta-prelado-opus-dei-contemplacao-2026/).

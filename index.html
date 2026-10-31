@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Felipe G. Bogo — matemática, análise geométrica, publicações e notas de aula.">
+  <meta name="description" content="Felipe G. Bogo — mathematics, geometric analysis, publications and class notes. Seeking postdoctoral positions; PhD thesis defense expected in February 2027.">
   <meta name="color-scheme" content="light dark">
   <title>Felipe G. Bogo</title>
   <style>
@@ -113,23 +113,23 @@
     }
     @media(pointer:coarse) { #felipe-bogo-classic-cv .bogo-item-links a { min-height:2.75rem; display:inline-flex; align-items:center; } }
   </style>
-  <main class="bogo-site" lang="pt-BR">
+  <main class="bogo-site" lang="en">
     <header class="bogo-header">
       <span class="bogo-brand">Felipe G. Bogo</span>
-      <div class="bogo-languages" role="group" aria-label="Idioma / Language">
-        <button class="bogo-control" type="button" data-lang="pt" aria-pressed="true" aria-label="Português">PT</button>
-        <button class="bogo-control" type="button" data-lang="en" aria-pressed="false" aria-label="English">EN</button>
+      <div class="bogo-languages" role="group" aria-label="Language / Idioma">
+        <button class="bogo-control" type="button" data-lang="pt" aria-pressed="false" aria-label="Português">PT</button>
+        <button class="bogo-control" type="button" data-lang="en" aria-pressed="true" aria-label="English">EN</button>
       </div>
     </header>
-    <nav class="bogo-nav" aria-label="Navegação principal"></nav>
+    <nav class="bogo-nav" aria-label="Main navigation"></nav>
     <div class="bogo-home">
       <div class="bogo-hero">
         <div class="bogo-intro">
           <h1>Felipe G.<br>Bogo</h1>
-          <p class="bogo-copy" data-text="intro">Sou matemático, com interesse principal em análise geométrica e suas conexões com outras áreas.</p>
+          <p class="bogo-copy" data-text="intro">I am a mathematician mainly interested in geometric analysis and its connection to other fields.</p>
         </div>
-        <figure class="bogo-figure" aria-label="Catenoide">
-          <svg class="bogo-surface" role="img" aria-label="Catenoide representado por curvas coordenadas"></svg>
+        <figure class="bogo-figure" aria-label="Catenoid">
+          <svg class="bogo-surface" role="img" aria-label="Catenoid represented by coordinate curves"></svg>
         </figure>
       </div>
       <div class="bogo-bio"></div>
@@ -146,8 +146,8 @@
       const article = root.querySelector('.bogo-site');
       const imported = {
         bio:{
-          pt:'Sou doutorando em Matemática na Universidade Federal Fluminense (UFF), sob orientação de Sérgio de Moura Almaraz. Minha pesquisa se concentra em geometria diferencial e análise geométrica, em particular no problema singular de Yamabe–Escobar.\n\nMinha trajetória inclui uma visita de pesquisa à Universidade de Nanjing (2025–2026), com Chen XueZhang, e o mestrado na Universidade Estadual de Maringá (UEM), sob orientação de Ryuichi Fukuoka.',
-          en:'I am a PhD candidate in Mathematics at Universidade Federal Fluminense (UFF), advised by Sérgio de Moura Almaraz. My research focuses on differential geometry and geometric analysis, particularly the singular Yamabe–Escobar problem.\n\nMy academic experience includes a research visit to Nanjing University (2025–2026), working with Chen XueZhang, and a master’s degree at Universidade Estadual de Maringá (UEM), advised by Ryuichi Fukuoka.'
+          pt:'Sou doutorando em Matemática na Universidade Federal Fluminense (UFF), sob orientação de Sérgio de Moura Almaraz. Minha pesquisa se concentra em geometria diferencial e análise geométrica, em particular no problema singular de Yamabe–Escobar.\n\nEstou em busca de posições de pós-doutorado e espero defender minha tese em fevereiro de 2027.\n\nMinha trajetória inclui uma visita de pesquisa à Universidade de Nanjing (2025–2026), com Chen XueZhang, e o mestrado na Universidade Estadual de Maringá (UEM), sob orientação de Ryuichi Fukuoka.',
+          en:'I am a PhD candidate in Mathematics at Universidade Federal Fluminense (UFF), advised by Sérgio de Moura Almaraz. My research focuses on differential geometry and geometric analysis, particularly the singular Yamabe–Escobar problem.\n\nI am currently seeking postdoctoral positions and expect to defend my PhD thesis in February 2027.\n\nMy academic experience includes a research visit to Nanjing University (2025–2026), working with Chen XueZhang, and a master’s degree at Universidade Estadual de Maringá (UEM), advised by Ryuichi Fukuoka.'
         },
         homeLinks:[
           // Supplied compiled CV; keep this relative path when updating the document.
@@ -159,7 +159,7 @@
           {label:'Ryuichi Fukuoka',href:'http://lattes.cnpq.br/8157207851494702'}
         ],
         education:[
-          {dates:'2024–2027',title:{pt:'Doutorado em Matemática',en:'PhD in Mathematics'},detail:{pt:'Universidade Federal Fluminense · conclusão prevista para 2027',en:'Universidade Federal Fluminense · expected completion in 2027'}},
+          {dates:'2024–2027',title:{pt:'Doutorado em Matemática',en:'PhD in Mathematics'},detail:{pt:'Universidade Federal Fluminense · defesa da tese prevista para fevereiro de 2027',en:'Universidade Federal Fluminense · thesis defense expected in February 2027'}},
           {dates:'2025–2026',title:{pt:'Visita de pesquisa',en:'Research visit'},detail:{pt:'Universidade de Nanjing · Chen XueZhang',en:'Nanjing University · Chen XueZhang'}},
           {dates:'2022–2023',title:{pt:'Mestrado em Matemática',en:'MSc in Mathematics'},detail:'Universidade Estadual de Maringá'},
           {dates:'2017–2021',title:{pt:'Graduação em Matemática',en:'BSc in Mathematics'},detail:'Universidade Estadual de Maringá'}
@@ -227,7 +227,7 @@
         return url.pathname+url.search;
       }
       const initialPage=pageFromUrl();
-      const state={lang:'pt',page:initialPage,mesh:22,lessonOpen:initialPage==='course'&&Boolean(lessonTarget()),lessonScroll:0};
+      const state={lang:'en',page:initialPage,mesh:22,lessonOpen:initialPage==='course'&&Boolean(lessonTarget()),lessonScroll:0};
       function localize(value) { return typeof value==='string'?value:value&&(value[state.lang]||value.en||value.pt)||''; }
       const preferenceKey='felipe-bogo-language';
       try {
@@ -391,6 +391,6 @@
     })();
   </script>
 </div>
-  <noscript>Ative o JavaScript para navegar pelas seções e alternar entre português e inglês. / Enable JavaScript to browse the sections and switch languages.</noscript>
+  <noscript>Enable JavaScript to browse the sections and switch languages. / Ative o JavaScript para navegar pelas seções e alternar entre português e inglês.</noscript>
 </body>
 </html>

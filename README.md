@@ -8,7 +8,7 @@ Personal academic website of Felipe G. Bogo, featuring research in differential 
 
 The site brings together my academic work, teaching materials, and contact information. Its classical visual style combines serif typography with mathematical surfaces drawn as blue SVG wireframes.
 
-The layout adapts to desktop, tablet, and mobile screens, with fluid text sizes and support for light and dark color schemes. Visitors can switch between Portuguese and English; their language preference is saved in their browser. Linked documents retain their original language.
+The layout adapts to desktop, tablet, and mobile screens, with fluid text sizes and support for light and dark color schemes. English is the default language. Visitors can switch between English and Portuguese; their language preference is saved in their browser. Linked documents retain their original language.
 
 Each section has a direct URL, so refreshing the page keeps the current section and browser Back/Forward navigation works. The menu also supports opening a section in a new tab.
 

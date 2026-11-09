@@ -87,6 +87,10 @@
     #felipe-bogo-classic-cv .bogo-lesson-reader:focus-visible { outline:2px solid var(--bogo-blue); outline-offset:-3px; }
     #felipe-bogo-classic-cv .bogo-lesson-text { max-width:68ch; margin:0 auto; font:400 var(--bogo-reading-size)/1.85 Georgia,serif; overflow-wrap:anywhere; }
     #felipe-bogo-classic-cv .bogo-lesson-text p { margin:0 0 1.25rem; }
+    #felipe-bogo-classic-cv .bogo-lesson-text blockquote { margin:0 0 1.25rem; padding-inline-start:1rem; border-inline-start:2px solid var(--bogo-line); }
+    #felipe-bogo-classic-cv .bogo-lesson-text blockquote > :last-child { margin-bottom:0; }
+    #felipe-bogo-classic-cv .bogo-lesson-text ol:not(.bogo-lesson-notes) { margin:0 0 1.25rem; padding-inline-start:1.75rem; }
+    #felipe-bogo-classic-cv .bogo-lesson-text ol:not(.bogo-lesson-notes) li { margin-bottom:.5rem; }
     #felipe-bogo-classic-cv .bogo-lesson-text h3 { margin:2.25rem 0 1rem; font:400 clamp(1.375rem,1.2rem + .6vw,1.75rem)/1.4 Georgia,serif; }
     #felipe-bogo-classic-cv .bogo-lesson-text h4 { margin:1.75rem 0 1rem; font:400 clamp(1.1875rem,1.1rem + .3vw,1.375rem)/1.5 Georgia,serif; }
     #felipe-bogo-classic-cv .bogo-lesson-text .bogo-lesson-note-ref { font-size:.75em; line-height:0; }
@@ -139,7 +143,7 @@
     <section class="bogo-page" aria-live="polite" hidden></section>
   </main>
   <script src="assets/surfaces.js"></script>
-  <script src="assets/doctrine-lesson.js?v=86c4fbc6e067"></script>
+  <script src="assets/doctrine-lesson.js?v=515336ea2d4a"></script>
   <script>
     (() => {
       const root = document.getElementById('felipe-bogo-classic-cv');
@@ -218,15 +222,20 @@
         ]
       };
       const text = {
-        pt:{eyebrow:'Matemática',intro:'Sou matemático, com interesse principal em análise geométrica e suas conexões com outras áreas.',notes:'Notas de aula',notesText:'Matemática para ler, estudar e revisitar.',doctrine:'Curso de Doutrina',courseText:'Programa, notas de aula e leituras complementares.',exploreNotes:'Explorar as notas →',exploreCourse:'Acessar o curso →',nav:['Início','Publicações','Notas de aula','Curso de Doutrina','Contato'],publicationsIntro:'Artigos e trabalhos acadêmicos.',notesIntro:'Notas organizadas por disciplina e assunto.',contactIntro:'Contato e informações institucionais.',courseIntro:'Programa, bibliografia e materiais de cada encontro.',lesson:'Como fazer perguntas lendo livros?',lessonLabel:'Aula 0',lessonOpen:'Abrir aula',lessonClose:'Fechar aula',lessonDownload:'Baixar aula',lessonDownloadLabel:'Baixar aula em PDF',lessonReaderHint:'Role dentro da caixa para ler a aula completa.',documentLanguage:'Documento em português',courseLabel:'Formação católica',researchLabel:'Pesquisa',teachingLabel:'Ensino',contactLabel:'Contato',materialsSoon:'Material em breve'},
-        en:{eyebrow:'Mathematics',intro:'I am a mathematician mainly interested in geometric analysis and its connection to other fields.',notes:'Class Notes',notesText:'Mathematics to read, study, and revisit.',doctrine:'Catholic Doctrine',courseText:'Syllabus, lecture notes, and further reading.',exploreNotes:'Explore the notes →',exploreCourse:'Explore the course →',nav:['Home','Publications','Class Notes','Catholic Doctrine','Contact'],publicationsIntro:'Articles and academic work.',notesIntro:'Notes organized by course and subject.',contactIntro:'Contact and institutional information.',courseIntro:'Syllabus, bibliography, and materials for each session.',lesson:'How to ask questions while reading books?',lessonLabel:'Lesson 0',lessonOpen:'Read lesson',lessonClose:'Close lesson',lessonDownload:'Download lesson',lessonDownloadLabel:'Download lesson PDF',lessonReaderHint:'Scroll inside the box to read the full lesson.',documentLanguage:'Document in Portuguese',courseLabel:'Catholic formation',researchLabel:'Research',teachingLabel:'Teaching',contactLabel:'Contact',materialsSoon:'Material coming soon'}
+        pt:{eyebrow:'Matemática',intro:'Sou matemático, com interesse principal em análise geométrica e suas conexões com outras áreas.',notes:'Notas de aula',notesText:'Matemática para ler, estudar e revisitar.',doctrine:'Curso de Doutrina',courseText:'Programa, notas de aula e leituras complementares.',exploreNotes:'Explorar as notas →',exploreCourse:'Acessar o curso →',nav:['Início','Publicações','Notas de aula','Curso de Doutrina','Contato'],publicationsIntro:'Artigos e trabalhos acadêmicos.',notesIntro:'Notas organizadas por disciplina e assunto.',contactIntro:'Contato e informações institucionais.',courseIntro:'Programa, bibliografia e materiais de cada encontro.',lessonLabel:'Aula',lessonOpen:'Abrir aula',lessonClose:'Fechar aula',lessonDownload:'Baixar aula',lessonDownloadLabel:'Baixar aula em PDF',lessonReaderHint:'Role dentro da caixa para ler a aula completa.',documentLanguage:'Documento em português',courseLabel:'Formação católica',researchLabel:'Pesquisa',teachingLabel:'Ensino',contactLabel:'Contato',materialsSoon:'Material em breve'},
+        en:{eyebrow:'Mathematics',intro:'I am a mathematician mainly interested in geometric analysis and its connection to other fields.',notes:'Class Notes',notesText:'Mathematics to read, study, and revisit.',doctrine:'Catholic Doctrine',courseText:'Syllabus, lecture notes, and further reading.',exploreNotes:'Explore the notes →',exploreCourse:'Explore the course →',nav:['Home','Publications','Class Notes','Catholic Doctrine','Contact'],publicationsIntro:'Articles and academic work.',notesIntro:'Notes organized by course and subject.',contactIntro:'Contact and institutional information.',courseIntro:'Syllabus, bibliography, and materials for each session.',lessonLabel:'Lesson',lessonOpen:'Read lesson',lessonClose:'Close lesson',lessonDownload:'Download lesson',lessonDownloadLabel:'Download lesson PDF',lessonReaderHint:'Scroll inside the box to read the full lesson.',documentLanguage:'Document in Portuguese',courseLabel:'Catholic formation',researchLabel:'Research',teachingLabel:'Teaching',contactLabel:'Contact',materialsSoon:'Material coming soon'}
       };
       const pages=['home','publications','notes','course','contact'];
+      const lessons=window.BogoDoctrineLessons||[];
       // Query routes work on GitHub Pages without server rewrites. The hash
       // remains available for the lesson's native footnote links.
       const pageSlugs={home:'',publications:'publications',notes:'class-notes',course:'doctrine',contact:'contact'};
       function lessonTarget() {
-        try {const id=decodeURIComponent(window.location.hash.slice(1));return id.startsWith('lesson-0-')?id:'';}catch{return '';}
+        try {
+          const id=decodeURIComponent(window.location.hash.slice(1));
+          const lesson=lessons.find(item=>id.startsWith(`lesson-${item.number}-`));
+          return lesson?{id,number:lesson.number}:null;
+        } catch { return null; }
       }
       function pageFromUrl() {
         const slug=new URL(window.location.href).searchParams.get('page');
@@ -238,7 +247,8 @@
         return url.pathname+url.search;
       }
       const initialPage=pageFromUrl();
-      const state={lang:'en',page:initialPage,mesh:22,lessonOpen:initialPage==='course'&&Boolean(lessonTarget()),lessonScroll:0};
+      const initialLesson=initialPage==='course'?lessonTarget():null;
+      const state={lang:'en',page:initialPage,mesh:22,lessonStates:new Map(lessons.map(({number})=>[number,{open:initialLesson?.number===number,scroll:0}]))};
       function localize(value) { return typeof value==='string'?value:value&&(value[state.lang]||value.en||value.pt)||''; }
       const preferenceKey='felipe-bogo-language';
       try {
@@ -269,6 +279,45 @@
           if(item.links&&item.links.length){const links=document.createElement('div');links.className='bogo-item-links';links.append(...item.links.map(makeLink));li.append(links);}
           list.append(li);
         }
+      }
+      function setLessonOpen(card, progress, open) {
+        const body=card.querySelector('.bogo-lesson-body');
+        const reader=card.querySelector('.bogo-lesson-reader');
+        if(!body.hidden)progress.scroll=reader.scrollTop;
+        progress.open=open;
+        body.hidden=!open;
+        card.classList.toggle('is-open',open);
+        card.querySelector('.bogo-lesson-summary').setAttribute('aria-expanded',String(open));
+        if(open)reader.scrollTop=progress.scroll;
+      }
+      function appendLesson(parent,lesson,d) {
+        const progress=state.lessonStates.get(lesson.number);
+        const idPrefix=`bogo-lesson-${lesson.number}`;
+        const lessonLabel=`${d.lessonLabel} ${lesson.number}`;
+        const card=document.createElement('section');card.className=`bogo-lesson${progress.open?' is-open':''}`;card.dataset.lesson=String(lesson.number);
+        const cardHeader=document.createElement('div');cardHeader.className='bogo-lesson-header';
+        const heading=document.createElement('h2');heading.className='bogo-lesson-heading';
+        const summary=document.createElement('button');summary.type='button';summary.className='bogo-lesson-summary';summary.setAttribute('aria-expanded',String(progress.open));summary.setAttribute('aria-controls',`${idPrefix}-body`);
+        const summaryHeading=document.createElement('span');summaryHeading.className='bogo-lesson-summary-content';
+        const number=document.createElement('span');number.className='bogo-number';number.textContent=String(lesson.number).padStart(2,'0');number.setAttribute('aria-hidden','true');
+        const item=document.createElement('span');
+        const name=document.createElement('span');name.className='bogo-lesson-name';name.id=`${idPrefix}-title`;name.textContent=state.lang==='pt'?lesson.title:lesson.titleEn;
+        const small=document.createElement('small');small.className='bogo-lesson-label';small.textContent=`${lessonLabel} · ${d.documentLanguage}`;item.append(name,small);
+        const action=document.createElement('span');action.className='bogo-lesson-action';
+        const actionCopy=document.createElement('span');actionCopy.className='bogo-lesson-action-copy';
+        for(const [className,label] of [['bogo-lesson-open',d.lessonOpen],['bogo-lesson-close',d.lessonClose]]){const span=document.createElement('span');span.className=className;span.textContent=label;actionCopy.append(span);}
+        const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');icon.classList.add('bogo-lesson-chevron');icon.setAttribute('viewBox','0 0 20 20');icon.setAttribute('aria-hidden','true');
+        const chevron=document.createElementNS('http://www.w3.org/2000/svg','path');chevron.setAttribute('d','M4 7L10 13L16 7');chevron.setAttribute('fill','none');chevron.setAttribute('stroke','currentColor');chevron.setAttribute('stroke-width','1.5');icon.append(chevron);
+        action.append(actionCopy,icon);summaryHeading.append(number,item,action);summary.append(summaryHeading);heading.append(summary);
+        const download=document.createElement('a');download.className='bogo-lesson-download';download.href=lesson.pdfUrl;download.download=lesson.pdfFilename;download.type='application/pdf';download.target='_blank';download.rel='noopener noreferrer';download.textContent=d.lessonDownload;download.setAttribute('aria-label',`${d.lessonDownloadLabel} — ${lessonLabel}`);
+        cardHeader.append(heading,download);
+        const body=document.createElement('div');body.className='bogo-lesson-body';body.id=`${idPrefix}-body`;body.hidden=!progress.open;
+        const hint=document.createElement('p');hint.className='bogo-lesson-hint';hint.id=`${idPrefix}-hint`;hint.textContent=d.lessonReaderHint;
+        const reader=document.createElement('div');reader.className='bogo-lesson-reader';reader.tabIndex=0;reader.setAttribute('role','region');reader.setAttribute('aria-labelledby',name.id);reader.setAttribute('aria-describedby',hint.id);
+        const documentText=document.createElement('article');documentText.className='bogo-lesson-text';documentText.lang=lesson.language;documentText.innerHTML=lesson.html;reader.append(documentText);
+        body.append(hint,reader);card.append(cardHeader,body);parent.append(card);if(progress.open)reader.scrollTop=progress.scroll;
+        summary.addEventListener('click',()=>setLessonOpen(card,progress,!progress.open));
+        reader.addEventListener('scroll',()=>{if(!body.hidden)progress.scroll=reader.scrollTop;});
       }
       function render() {
         const d=text[state.lang];article.lang=state.lang==='pt'?'pt-BR':'en';document.documentElement.lang=article.lang;
@@ -316,31 +365,8 @@
           } else header.classList.add('without-surface');
           panel.append(header);
           if(state.page==='course') {
-            const lesson=window.BogoDoctrineLesson;
-            const card=document.createElement('section');card.className=`bogo-lesson${state.lessonOpen?' is-open':''}`;
-            const cardHeader=document.createElement('div');cardHeader.className='bogo-lesson-header';
-            const heading=document.createElement('h2');heading.className='bogo-lesson-heading';
-            const summary=document.createElement('button');summary.type='button';summary.className='bogo-lesson-summary';summary.setAttribute('aria-expanded',String(state.lessonOpen));summary.setAttribute('aria-controls','lesson-zero-body');
-            const summaryHeading=document.createElement('span');summaryHeading.className='bogo-lesson-summary-content';
-            const number=document.createElement('span');number.className='bogo-number';number.textContent='00';number.setAttribute('aria-hidden','true');
-            const item=document.createElement('span');
-            const name=document.createElement('span');name.className='bogo-lesson-name';name.id='lesson-zero-title';name.textContent=state.lang==='pt'?lesson.title:d.lesson;
-            const small=document.createElement('small');small.className='bogo-lesson-label';small.textContent=`${d.lessonLabel} · ${d.documentLanguage}`;item.append(name,small);
-            const action=document.createElement('span');action.className='bogo-lesson-action';
-            const actionCopy=document.createElement('span');actionCopy.className='bogo-lesson-action-copy';
-            for(const [className,label] of [['bogo-lesson-open',d.lessonOpen],['bogo-lesson-close',d.lessonClose]]){const span=document.createElement('span');span.className=className;span.textContent=label;actionCopy.append(span);}
-            const icon=document.createElementNS('http://www.w3.org/2000/svg','svg');icon.classList.add('bogo-lesson-chevron');icon.setAttribute('viewBox','0 0 20 20');icon.setAttribute('aria-hidden','true');
-            const chevron=document.createElementNS('http://www.w3.org/2000/svg','path');chevron.setAttribute('d','M4 7L10 13L16 7');chevron.setAttribute('fill','none');chevron.setAttribute('stroke','currentColor');chevron.setAttribute('stroke-width','1.5');icon.append(chevron);
-            action.append(actionCopy,icon);summaryHeading.append(number,item,action);summary.append(summaryHeading);heading.append(summary);
-            const download=document.createElement('a');download.className='bogo-lesson-download';download.href=lesson.pdfUrl;download.download=lesson.pdfFilename;download.type='application/pdf';download.target='_blank';download.rel='noopener noreferrer';download.textContent=d.lessonDownload;download.setAttribute('aria-label',d.lessonDownloadLabel);
-            cardHeader.append(heading,download);
-            const body=document.createElement('div');body.className='bogo-lesson-body';body.id='lesson-zero-body';body.hidden=!state.lessonOpen;
-            const hint=document.createElement('p');hint.className='bogo-lesson-hint';hint.id='lesson-zero-hint';hint.textContent=d.lessonReaderHint;
-            const reader=document.createElement('div');reader.className='bogo-lesson-reader';reader.tabIndex=0;reader.setAttribute('role','region');reader.setAttribute('aria-labelledby',name.id);reader.setAttribute('aria-describedby',hint.id);
-            const documentText=document.createElement('article');documentText.className='bogo-lesson-text';documentText.lang=lesson.language;documentText.innerHTML=lesson.html;reader.append(documentText);
-            body.append(hint,reader);card.append(cardHeader,body);panel.append(card);reader.scrollTop=state.lessonScroll;
-            summary.addEventListener('click',()=>{state.lessonOpen=!state.lessonOpen;body.hidden=!state.lessonOpen;card.classList.toggle('is-open',state.lessonOpen);summary.setAttribute('aria-expanded',String(state.lessonOpen));if(state.lessonOpen)reader.scrollTop=state.lessonScroll;});
-            reader.addEventListener('scroll',()=>{if(!body.hidden)state.lessonScroll=reader.scrollTop;});
+            for(const lesson of lessons)appendLesson(panel,lesson,d);
+            if(!lessons.length){const p=document.createElement('p');p.className='bogo-item-detail';p.textContent=d.materialsSoon;panel.append(p);}
           } else appendItems(panel,imported[state.page]);
         }
         const surface=article.querySelector('.bogo-surface');surface.setAttribute('aria-label',state.lang==='pt'?'Catenoide representado por curvas coordenadas':'Catenoid represented by coordinate curves');
@@ -363,15 +389,20 @@
       });
       function restoreLessonTarget() {
         if(state.page!=='course')return;
-        const id=lessonTarget(),target=id&&document.getElementById(id),reader=article.querySelector('.bogo-lesson-reader');
-        if(target&&reader&&reader.contains(target)){target.scrollIntoView({block:'nearest'});state.lessonScroll=reader.scrollTop;}
+        const location=lessonTarget();
+        const target=location&&document.getElementById(location.id);
+        const reader=target?.closest('.bogo-lesson-reader');
+        if(reader&&article.contains(reader)){target.scrollIntoView({block:'nearest'});state.lessonStates.get(location.number).scroll=reader.scrollTop;}
       }
       function syncLocation() {
         const page=pageFromUrl();
+        const target=page==='course'?lessonTarget():null;
         // Hash-only history entries must not rebuild the lesson's DOM.
-        if(page!==state.page){state.page=page;render();}
-        if(page==='course'&&lessonTarget()) {
-          if(!state.lessonOpen){state.lessonOpen=true;render();}
+        if(page!==state.page){state.page=page;if(target)state.lessonStates.get(target.number).open=true;render();}
+        if(target) {
+          const progress=state.lessonStates.get(target.number);
+          const card=article.querySelector(`.bogo-lesson[data-lesson="${target.number}"]`);
+          if(card&&!progress.open)setLessonOpen(card,progress,true);
           window.requestAnimationFrame(restoreLessonTarget);
         }
       }
@@ -397,7 +428,7 @@
         svg.replaceChildren(...elements);
       }
       render();
-      if(state.page==='course'&&lessonTarget())window.requestAnimationFrame(restoreLessonTarget);
+      if(initialLesson)window.requestAnimationFrame(restoreLessonTarget);
       if('ResizeObserver' in window)new ResizeObserver(drawSurface).observe(root);
       else window.addEventListener('resize',drawSurface);
     })();

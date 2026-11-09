@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Build the inline Aula 0 document from its original Markdown.
+"""Build the inline doctrine lessons from their original Markdown.
 
 Run from any directory with Python 3.10 or newer:
     python3 scripts/build_doctrine_lesson.py
 
-This dependency-free renderer supports the Markdown used in the source lesson:
-headings, paragraphs, emphasis, links, inline code, and numbered footnotes.
+This dependency-free renderer supports the Markdown used in the lessons:
+headings, paragraphs, blockquotes, sequential ordered lists with single-line
+items, emphasis, links, inline code, and numbered footnotes.
 Raw HTML is escaped. Only HTTP(S) links are emitted as external links. The
 original Markdown stays in docs/doctrine/; no browser fetch or Markdown library
 is needed to read the generated lesson. The script also updates index.html with
@@ -26,18 +27,21 @@ from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / "docs/doctrine/Capitulo_0_Como_fazer_perguntas_lendo_livros.md"
 OUTPUT = ROOT / "assets/doctrine-lesson.js"
 ENTRY = ROOT / "index.html"
-PDF = ROOT / "docs/doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf"
-PREFIX = "lesson-0-"
+LESSONS = (
+    (0, "Como_fazer_perguntas_lendo_livros", "How to ask questions while reading books?"),
+    (1, "O_fim_da_existencia_do_homem", "The Purpose of Human Existence"),
+)
 FOOTNOTE = re.compile(r"\[\^([A-Za-z0-9_-]+)\]")
 DEFINITION = re.compile(r"^\[\^([A-Za-z0-9_-]+)\]:\s*(.*)$")
 LINK = re.compile(r"\[([^\]\n]+)\]\(([^\s)]+)\)")
+ORDERED_ITEM = re.compile(r"([0-9]+)\.\s+(.+)")
 
 
 class LessonRenderer:
-    def __init__(self, definitions: dict[str, str]) -> None:
+    def __init__(self, number: int, definitions: dict[str, str]) -> None:
+        self.prefix = f"lesson-{number}-"
         self.definitions = definitions
         self.references: Counter[str] = Counter()
         self.reference_ids: dict[str, list[str]] = {}
@@ -59,11 +63,11 @@ class LessonRenderer:
                     raise ValueError(f"Missing definition for footnote {label}")
                 self.references[label] += 1
                 occurrence = self.references[label]
-                reference_id = f"{PREFIX}ref-{label}-{occurrence}"
+                reference_id = f"{self.prefix}ref-{label}-{occurrence}"
                 self.reference_ids.setdefault(label, []).append(reference_id)
                 parts.append(
                     f'<sup class="bogo-lesson-note-ref"><a id="{reference_id}" '
-                    f'href="#{PREFIX}note-{label}" role="doc-noteref" '
+                    f'href="#{self.prefix}note-{label}" role="doc-noteref" '
                     f'aria-label="Nota {html.escape(label)}">{html.escape(label)}</a></sup>'
                 )
                 index = note.end()
@@ -101,7 +105,7 @@ class LessonRenderer:
     def heading(self, level: int, text: str) -> str:
         slug = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
         slug = re.sub(r"[^a-z0-9]+", "-", slug.lower()).strip("-") or "section"
-        base_id = PREFIX + slug
+        base_id = self.prefix + slug
         heading_id, occurrence = base_id, 1
         while heading_id in self.heading_ids:
             occurrence += 1
@@ -119,19 +123,42 @@ class LessonRenderer:
                 blocks.append(f'<p>{self.inline(" ".join(paragraph))}</p>')
                 paragraph.clear()
 
-        for line in lines:
-            stripped = line.strip()
+        index = 0
+        while index < len(lines):
+            stripped = lines[index].strip()
             if not stripped:
                 flush()
+            elif stripped.startswith(">"):
+                flush()
+                quoted = []
+                while index < len(lines) and lines[index].lstrip().startswith(">"):
+                    quoted.append(lines[index].lstrip()[1:].lstrip())
+                    index += 1
+                blocks.append(f"<blockquote>\n{self.blocks(quoted)}\n</blockquote>")
                 continue
-            heading = re.match(r"^(#{1,6})\s+(.+?)\s*$", stripped)
-            if heading:
+            elif first_item := ORDERED_ITEM.fullmatch(stripped):
+                flush()
+                start = int(first_item.group(1))
+                items = []
+                while index < len(lines):
+                    item = ORDERED_ITEM.fullmatch(lines[index].strip())
+                    if not item:
+                        break
+                    if int(item.group(1)) != start + len(items):
+                        raise ValueError("An ordered list must use sequential numbering.")
+                    items.append(f"<li>{self.inline(item.group(2))}</li>")
+                    index += 1
+                start_attribute = f' start="{start}"' if start != 1 else ""
+                blocks.append(f"<ol{start_attribute}>\n" + "\n".join(items) + "\n</ol>")
+                continue
+            elif heading := re.fullmatch(r"(#{1,6})\s+(.+?)\s*", stripped):
                 flush()
                 blocks.append(self.heading(len(heading.group(1)), heading.group(2)))
             else:
-                if re.match(r"^(?:```|~~~|>|[-+*]\s|\d+[.)]\s)", stripped):
-                    raise ValueError("Unsupported block Markdown; extend this renderer before regenerating the lesson.")
+                if re.match(r"^(?:```|~~~|[-+*]\s|\d+[.)]\s)", stripped):
+                    raise ValueError("Unsupported block Markdown; extend this renderer before regenerating the lessons.")
                 paragraph.append(stripped)
+            index += 1
         flush()
         return "\n".join(blocks)
 
@@ -146,17 +173,19 @@ class LessonRenderer:
                 for reference_id in self.reference_ids[label]
             )
             notes.append(
-                f'<li id="{PREFIX}note-{label}" role="doc-endnote">'
+                f'<li id="{self.prefix}note-{label}" role="doc-endnote">'
                 f'{self.inline(text, footnotes=False)} {backlinks}</li>'
             )
         return '<ol class="bogo-lesson-notes">\n' + "\n".join(notes) + "\n</ol>"
 
 
-def build() -> dict[str, object]:
-    source_bytes = SOURCE.read_bytes()
-    pdf_bytes = PDF.read_bytes()
+def build_lesson(number: int, basename: str, title_en: str) -> tuple[dict[str, object], dict[str, object]]:
+    source = ROOT / f"docs/doctrine/Capitulo_{number}_{basename}.md"
+    pdf = ROOT / f"docs/doctrine/Aula_{number}_{basename}.pdf"
+    source_bytes = source.read_bytes()
+    pdf_bytes = pdf.read_bytes()
     if not pdf_bytes.startswith(b"%PDF-"):
-        raise ValueError("The lesson download must be a PDF file.")
+        raise ValueError(f"The lesson {number} download must be a PDF file.")
     pdf_sha256 = hashlib.sha256(pdf_bytes).hexdigest()
     lines = source_bytes.decode("utf-8").splitlines()
     definitions: dict[str, str] = {}
@@ -175,23 +204,48 @@ def build() -> dict[str, object]:
     if not body or not body[0].startswith("# "):
         raise ValueError("The lesson must start with a Markdown h1 title.")
     document_title = body.pop(0)[2:].strip()
-    title = re.sub(r"^Capítulo\s+0\s*[—–-]\s*", "", document_title)
-    renderer = LessonRenderer(definitions)
+    title_match = re.fullmatch(rf"Capítulo\s+{number}\s*[—–-]\s*(\S.*)", document_title)
+    if not title_match:
+        raise ValueError(f"The title must start with 'Capítulo {number} —'.")
+    title = title_match.group(1)
+    renderer = LessonRenderer(number, definitions)
     rendered = renderer.blocks(body) + "\n" + renderer.notes()
     data = {
+        "number": number,
         "title": title,
+        "titleEn": title_en,
         "documentTitle": document_title,
         "language": "pt-BR",
-        "sourcePath": SOURCE.relative_to(ROOT).as_posix(),
+        "sourcePath": source.relative_to(ROOT).as_posix(),
         "sourceSha256": hashlib.sha256(source_bytes).hexdigest(),
-        "pdfUrl": PDF.relative_to(ROOT).as_posix() + "?v=" + pdf_sha256[:12],
-        "pdfFilename": PDF.name,
+        "pdfUrl": pdf.relative_to(ROOT).as_posix() + "?v=" + pdf_sha256[:12],
+        "pdfFilename": pdf.name,
         "html": rendered,
     }
-    payload = json.dumps(data, ensure_ascii=False, indent=2).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
+    report = {
+        "number": number,
+        "source": str(source),
+        "title": title,
+        "source_bytes": len(source_bytes),
+        "source_sha256": data["sourceSha256"],
+        "pdf_bytes": len(pdf_bytes),
+        "pdf_sha256": pdf_sha256,
+        "footnotes": len(definitions),
+        "footnote_references": sum(renderer.references.values()),
+    }
+    return data, report
+
+
+def build() -> dict[str, object]:
+    numbers = [number for number, _, _ in LESSONS]
+    if len(set(numbers)) != len(numbers) or 0 not in numbers:
+        raise ValueError("Each lesson needs a unique number, including the original lesson 0.")
+    results = [build_lesson(*lesson) for lesson in sorted(LESSONS, reverse=True)]
+    payload = json.dumps([data for data, _ in results], ensure_ascii=False, indent=2).replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
     javascript = (
-        "/* Generated from the original Aula 0 Markdown by scripts/build_doctrine_lesson.py. */\n"
-        "window.BogoDoctrineLesson = Object.freeze(" + payload + ");\n"
+        "/* Generated from the original lesson Markdown by scripts/build_doctrine_lesson.py. */\n"
+        "window.BogoDoctrineLessons = Object.freeze(" + payload + ".map(lesson => Object.freeze(lesson)));\n"
+        "window.BogoDoctrineLesson = window.BogoDoctrineLessons.find(lesson => lesson.number === 0);\n"
     )
     asset_version = hashlib.sha256(javascript.encode("utf-8")).hexdigest()[:12]
     entry = ENTRY.read_text(encoding="utf-8")
@@ -206,17 +260,10 @@ def build() -> dict[str, object]:
     if updated_entry != entry:
         ENTRY.write_text(updated_entry, encoding="utf-8")
     return {
-        "source": str(SOURCE),
         "output": str(OUTPUT),
         "entry": str(ENTRY),
         "asset_version": asset_version,
-        "title": title,
-        "source_bytes": len(source_bytes),
-        "source_sha256": data["sourceSha256"],
-        "pdf_bytes": len(pdf_bytes),
-        "pdf_sha256": pdf_sha256,
-        "footnotes": len(definitions),
-        "footnote_references": sum(renderer.references.values()),
+        "lessons": [report for _, report in results],
         "output_bytes": OUTPUT.stat().st_size,
     }
 

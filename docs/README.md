@@ -2,7 +2,10 @@
 
 `preprints/` contains the two submitted arXiv versions linked from Publications. Each **Preprint (ArXiv)** button downloads the corresponding PDF.
 
-The PDF notes for Lesson 0 are available at `doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf`. The course card provides separate actions for reading the lesson on the website and downloading these notes.
+The course displays the lessons in descending order, with separate actions for reading and downloading each one:
+
+- Lesson 1: [`Aula_1_O_fim_da_existencia_do_homem.pdf`](doctrine/Aula_1_O_fim_da_existencia_do_homem.pdf)
+- Lesson 0: [`Aula_0_Como_fazer_perguntas_lendo_livros.pdf`](doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf)
 
 This directory includes the compiled CV:
 

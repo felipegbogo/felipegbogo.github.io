@@ -1,4 +1,6 @@
-# CV and Course Documents
+# CV, Preprints, and Course Documents
+
+`preprints/` contains the two submitted arXiv versions linked from Publications. Each **Preprint (ArXiv)** button downloads the corresponding PDF.
 
 The PDF notes for Lesson 0 are available at `doctrine/Aula_0_Como_fazer_perguntas_lendo_livros.pdf`. The course card provides separate actions for reading the lesson on the website and downloading these notes.
 

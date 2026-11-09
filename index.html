@@ -165,6 +165,17 @@
           {dates:'2017–2021',title:{pt:'Graduação em Matemática',en:'BSc in Mathematics'},detail:'Universidade Estadual de Maringá'}
         ],
         publications:[
+          {heading:'Preprints'},
+          {
+            title:'Global Classification of the Flat Singular Escobar-Yamabe Equation',
+            detail:{pt:'Felipe G. Bogo · 2026 · Submetido ao arXiv',en:'Felipe G. Bogo · 2026 · Submitted to arXiv'},
+            links:[{label:'Preprint (ArXiv)',href:'docs/preprints/global-classification-flat-singular-escobar-yamabe.pdf',download:true}]
+          },
+          {
+            title:'Delaunay Asymptotics for the Singular Escobar–Yamabe Equation',
+            detail:{pt:'Felipe G. Bogo · 2026 · Submetido ao arXiv',en:'Felipe G. Bogo · 2026 · Submitted to arXiv'},
+            links:[{label:'Preprint (ArXiv)',href:'docs/preprints/delaunay-asymptotics-singular-escobar-yamabe.pdf',download:true}]
+          },
           {heading:{pt:'Artigos publicados',en:'Published papers'}},
           {title:'Uma Demonstração Detalhada do Teorema de Gauss-Bonnet',detail:'Felipe Gabriel Bogo. Jornal Eletrônico de Ensino e Pesquisa de Matemática, 7(1), 1–9, 2023.',links:[{label:'PDF · PT',href:'https://dma.uem.br/kit/jeepema-1/art1-n1-2023.pdf'}]},
           {heading:{pt:'Tese de doutorado',en:'Doctoral thesis'}},
@@ -242,6 +253,7 @@
         const isPdf=/\.pdf(?:[?#]|$)/i.test(link.href);
         const isDocument=isPdf||/\.(?:docx?|pptx?|xlsx?|odt|ods|odp|tex)(?:[?#]|$)/i.test(link.href)||/^docs\//i.test(link.href);
         if(isPdf)a.type='application/pdf';
+        if(isPdf&&link.download)a.download='';
         if(!/^mailto:/i.test(link.href)&&(/^https?:/i.test(link.href)||isDocument)){a.target='_blank';a.rel='noopener noreferrer';}
         return a;
       }

@@ -23,7 +23,7 @@ Each section has a direct URL, so refreshing the page keeps the current section 
 ## Sections
 
 - **Homepage:** a short biography, education and research visits, and links to my CV and Lattes profile.
-- **Publications:** published papers, ongoing doctoral research, and my master's dissertation and related materials.
+- **Publications:** preprints, published papers, ongoing doctoral research, and my master's dissertation and related materials.
 - **Class Notes:** mathematics notes and problem sets, currently covering algebra and topology.
 - **Catholic Doctrine:** Lesson 0, “Como fazer perguntas lendo livros?”, offers two actions: read the lesson in a scrollable panel or download the PDF. The lesson remains in its original Portuguese when the interface language changes.
 - **Contact:** email addresses and institutional information.

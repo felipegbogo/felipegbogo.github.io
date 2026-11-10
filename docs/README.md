@@ -1,6 +1,6 @@
 # CV, Preprints, and Course Documents
 
-`preprints/` contains the two submitted arXiv versions linked from Publications. Each **Preprint (ArXiv)** button downloads the corresponding PDF.
+Each **Preprint (ArXiv)** button in Publications opens the official arXiv PDF. `preprints/` retains the original submission copies for existing links.
 
 The course displays the lessons in descending order, with separate actions for reading and downloading each one:
 

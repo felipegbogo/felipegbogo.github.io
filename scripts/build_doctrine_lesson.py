@@ -5,7 +5,7 @@ Run from any directory with Python 3.10 or newer:
     python3 scripts/build_doctrine_lesson.py
 
 This dependency-free renderer supports the Markdown used in the lessons:
-headings, paragraphs, blockquotes, sequential ordered lists with single-line
+headings, paragraphs, blockquotes, ordered and unordered lists with single-line
 items, emphasis, links, inline code, and numbered footnotes.
 Raw HTML is escaped. Only HTTP(S) links are emitted as external links. The
 original Markdown stays in docs/doctrine/; no browser fetch or Markdown library
@@ -32,11 +32,13 @@ ENTRY = ROOT / "index.html"
 LESSONS = (
     (0, "Como_fazer_perguntas_lendo_livros", "How to ask questions while reading books?"),
     (1, "O_fim_da_existencia_do_homem", "The Purpose of Human Existence"),
+    (2, "Deus_e_suas_perfeicoes", "God and His Perfections"),
 )
 FOOTNOTE = re.compile(r"\[\^([A-Za-z0-9_-]+)\]")
 DEFINITION = re.compile(r"^\[\^([A-Za-z0-9_-]+)\]:\s*(.*)$")
 LINK = re.compile(r"\[([^\]\n]+)\]\(([^\s)]+)\)")
 ORDERED_ITEM = re.compile(r"([0-9]+)\.\s+(.+)")
+UNORDERED_ITEM = re.compile(r"[-+*]\s+(.+)")
 
 
 class LessonRenderer:
@@ -151,6 +153,17 @@ class LessonRenderer:
                 start_attribute = f' start="{start}"' if start != 1 else ""
                 blocks.append(f"<ol{start_attribute}>\n" + "\n".join(items) + "\n</ol>")
                 continue
+            elif UNORDERED_ITEM.fullmatch(stripped):
+                flush()
+                items = []
+                while index < len(lines):
+                    item = UNORDERED_ITEM.fullmatch(lines[index].strip())
+                    if not item:
+                        break
+                    items.append(f"<li>{self.inline(item.group(1))}</li>")
+                    index += 1
+                blocks.append("<ul>\n" + "\n".join(items) + "\n</ul>")
+                continue
             elif heading := re.fullmatch(r"(#{1,6})\s+(.+?)\s*", stripped):
                 flush()
                 blocks.append(self.heading(len(heading.group(1)), heading.group(2)))
@@ -209,7 +222,9 @@ def build_lesson(number: int, basename: str, title_en: str) -> tuple[dict[str, o
         raise ValueError(f"The title must start with 'Capítulo {number} —'.")
     title = title_match.group(1)
     renderer = LessonRenderer(number, definitions)
-    rendered = renderer.blocks(body) + "\n" + renderer.notes()
+    rendered = renderer.blocks(body)
+    if definitions:
+        rendered += "\n" + renderer.notes()
     data = {
         "number": number,
         "title": title,
